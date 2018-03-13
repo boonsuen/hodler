@@ -1,0 +1,166 @@
+@font-face {
+  font-family: AvenirNext;
+  src: url(../fonts/AvenirNextLTPro-Medium.woff);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: AvenirNext;
+  src: url(../fonts/AvenirNextLTPro-Bold.woff);
+  font-weight: 700;
+}
+
+body {
+  font-family: AvenirNext, sans-serif;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 160px;
+  position: relative;
+  width: 80%;
+  max-width: 720px;
+  margin: auto;
+}
+
+.links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.links a {
+  margin: 10px 13px 0 0;
+}
+
+.links img {
+  width: 27px;
+}
+
+.logo {
+  width: 35px;
+  margin-bottom: 15px;
+}
+
+.title {
+  color: #181B3A;
+  font-size: 34px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.switch {
+  margin: 0 auto 30px auto;
+  display: flex;
+  width: 199px;
+  justify-content: center;
+}
+
+.switch a {
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  width: 100px;
+  box-sizing: border-box;
+}
+
+.active {
+  background-color: #EE732F;
+  color: #fff;
+}
+
+.not-active {
+  color: #EE732F;
+  border: 1px solid #EE732F;
+  transition: all .2s;
+}
+
+.not-active:hover {
+  background-color: rgba(255,107,0,0.1);
+  color: #EE732F;
+}
+
+.price-table {
+  box-shadow: 0 2px 27px 7px rgba(3,169,245,0.13);
+  width: 80%;
+  max-width: 720px;
+  margin: 0 auto 80px auto;
+  border-collapse: collapse;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+tr {
+  height: 50px;
+}
+
+th, td {
+  text-align: left;
+  padding-left: 30px;
+  border: 1px solid rgba(255,107,0,0.1);
+}
+
+th {
+  height: 65px;
+  border-top: none;
+}
+
+th:first-child, td:first-child {
+  border-left: none;
+}
+
+th:last-child, td:last-child {
+  border-right: none;
+}
+
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:nth-child(odd):not(.row-head) {
+  background: #f7feff;
+}
+
+.name, .price, .change {
+  color: #65748e;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.name {
+  color: #FF6B00;
+}
+
+.change {
+  position: relative;
+}
+
+.change::after {
+  transition: opacity .2s;
+  opacity: 0;
+  content: url('../img/sorter.svg');
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  width: 18px;
+}
+
+.change:hover::after {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.change, td:last-child {
+  width: 25%;
+}
