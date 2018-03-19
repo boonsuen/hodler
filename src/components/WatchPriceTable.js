@@ -1,4 +1,17 @@
 import React from 'react';
+import CoinRow from './CoinRow';
+
+const coins = [{
+  name: 'Etheehe',
+  priceUsd: '727',
+  priceSats: '72727',
+  priceChange: '5'
+}, {
+  name: 'ripple',
+  priceUsd: '100',
+  priceSats: '100000',
+  priceChange: '1'
+}];
 
 export default class HoldPriceTable extends React.Component {
   componentDidMount() {
@@ -28,16 +41,17 @@ export default class HoldPriceTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Ethereum (ETH)</td>
-            <td>$728</td>
-            <td className="pc">3</td>
-          </tr>
-          <tr>
-            <td>Monaco (MCO)</td>
-            <td>$6.94 / 65297</td>
-            <td className="pc">8</td>
-          </tr>
+        {
+          coins.map((coin, index) => (
+            <CoinRow
+              key={index}
+              name={coin.name}
+              priceUsd={coin.priceUsd}
+              priceSats={coin.priceSats}
+              priceChange={coin.priceChange}
+            />
+          ))
+        }
         </tbody>
       </table>
     );
