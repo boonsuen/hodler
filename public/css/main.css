@@ -68,6 +68,7 @@ a {
 
 .switch a {
   height: 45px;
+  cursor: pointer;
   text-align: center;
   line-height: 45px;
   width: 100px;
@@ -79,13 +80,13 @@ a {
   color: #fff;
 }
 
-.not-active {
+.inactive {
   color: #EE732F;
   border: 1px solid #EE732F;
   transition: all .2s;
 }
 
-.not-active:hover {
+.inactive:hover {
   background-color: rgba(255,107,0,0.1);
   color: #EE732F;
 }
