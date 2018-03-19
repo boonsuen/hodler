@@ -29,7 +29,7 @@ export default class WatchPriceTable extends React.Component {
         elem.style.color = "#ff8282";
       }
     }
-    this.props.view("watch");
+    this.props.state("watch", true);
   }
   render() {
     return (

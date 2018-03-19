@@ -6,19 +6,24 @@ import WatchPriceTable from './WatchPriceTable';
 
 export default class HodlerApp extends React.Component {
   state = {
-    view: null
+    view: null,
+    tableDoneRendering: false
   };
-  setView = (view) => {
-    this.setState(() => ({view}));
+  setStates = (view, tableDoneRendering) => {
+    this.setState(() => ({
+      view,
+      tableDoneRendering
+    }));
   };
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Switch view={this.state.view} />
+          {this.state.tableDoneRendering && <Switch view={this.state.view} />}
           <RouteSwitch>
-            <Route path="/" render={() => <HoldPriceTable view={this.setView} />} exact={true} />
-            <Route path="/watch" render={() => <WatchPriceTable view={this.setView} />} />
+            <Route path="/" render={() => <HoldPriceTable state={this.setStates} />} exact={true} />
+            <Route path="/watch" render={() => <WatchPriceTable state={this.setStates} />} />
+            <Route path="/p" component={WatchPriceTable} />
           </RouteSwitch>
         </div>
       </BrowserRouter>

@@ -10,21 +10,21 @@ export default class Switch extends React.Component {
   };
   componentDidMount() {
     console.log(this.props.view);
-    // if (this.props.view === 'hold') {
-    //   this.setState(() => ({
-    //     classNames: {
-    //       hold: 'active hold',
-    //       watch: 'inactive watch'
-    //     }
-    //   }))
-    // } else if (this.props.view === 'watch') {
-    //   this.setState(() => ({
-    //     classNames: {
-    //       hold: 'inactive hold',
-    //       watch: 'active watch'
-    //     }
-    //   }));
-    // }
+    if (this.props.view === 'hold') {
+      this.setState(() => ({
+        classNames: {
+          hold: 'active hold',
+          watch: 'inactive watch'
+        }
+      }))
+    } else if (this.props.view === 'watch') {
+      this.setState(() => ({
+        classNames: {
+          hold: 'inactive hold',
+          watch: 'active watch'
+        }
+      }));
+    }
   }
   handleSwitch = (e) => {
     const classNames = e.target.className.split(' ');

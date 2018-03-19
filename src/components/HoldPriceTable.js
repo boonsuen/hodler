@@ -16,7 +16,7 @@ export default class HoldPriceTable extends React.Component {
         elem.style.color = "#ff8282";
       }
     }
-    this.props.view("hold");
+    this.props.state("hold", true);
   }
   render() {
     return (
