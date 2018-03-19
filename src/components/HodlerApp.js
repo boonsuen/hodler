@@ -15,10 +15,10 @@ export default class HodlerApp extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Switch />
+          <Switch view={this.state.view} />
           <RouteSwitch>
             <Route path="/" render={() => <HoldPriceTable view={this.setView} />} exact={true} />
-            <Route path="/watch" component={WatchPriceTable} />
+            <Route path="/watch" render={() => <WatchPriceTable view={this.setView} />} />
           </RouteSwitch>
         </div>
       </BrowserRouter>

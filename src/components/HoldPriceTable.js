@@ -16,13 +16,14 @@ export default class HoldPriceTable extends React.Component {
         elem.style.color = "#ff8282";
       }
     }
+    this.props.view("hold");
   }
   render() {
     return (
       <table className="price-table">
         <thead>
           <tr className="row-head">
-            <th className="name">Name{this.props.match}</th>
+            <th className="name">Name</th>
             <th className="price">Price</th>
             <th className="change">Change</th>
           </tr>

@@ -13,7 +13,7 @@ const coins = [{
   priceChange: '1'
 }];
 
-export default class HoldPriceTable extends React.Component {
+export default class WatchPriceTable extends React.Component {
   componentDidMount() {
     // fetch('https://api.coinmarketcap.com/v1/ticker/?limit=500')
     //   .then(response => response.json())
@@ -29,6 +29,7 @@ export default class HoldPriceTable extends React.Component {
         elem.style.color = "#ff8282";
       }
     }
+    this.props.view("watch");
   }
   render() {
     return (
