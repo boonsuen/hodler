@@ -5,12 +5,13 @@ import CoinRow from './CoinRow';
 export default class HoldPriceTable extends React.Component {
   state = {
     coinsData: [],
-    coinsWatchId: ['bitcoin', 'power-ledger', 'wabi', 'nuls']
+    coinsWatchId: ['bitcoin', 'nuls', 'power-ledger', 'wabi']
   }
   componentDidMount() {
     axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
       .then(res => {
         let allCoinsData = res.data;
+        console.log(allCoinsData);
         let coinsData = [];
         this.state.coinsWatchId.map(id => {
           let singleCoinData = allCoinsData.filter(coin => coin.id === id);
@@ -41,6 +42,7 @@ export default class HoldPriceTable extends React.Component {
             <CoinRow
               key={index}
               name={coin.name}
+              symbol={coin.symbol}
               priceUsd={coin.price_usd}
               priceSats={coin.price_btc}
               priceChange={coin.percent_change_24h}

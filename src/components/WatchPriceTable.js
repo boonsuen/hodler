@@ -48,6 +48,7 @@ export default class WatchPriceTable extends React.Component {
             <CoinRow
               key={index}
               name={coin.name}
+              symbol={coin.symbol}
               priceUsd={coin.price_usd}
               priceSats={coin.price_btc}
               priceChange={coin.percent_change_24h}
