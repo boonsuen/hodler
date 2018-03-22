@@ -1,21 +1,28 @@
 import React from 'react';
+import axios from 'axios';
+import CoinRow from './CoinRow';
 
 export default class HoldPriceTable extends React.Component {
+  state = {
+    coinsData: [],
+    coinsWatchId: ['bitcoin', 'power-ledger', 'wabi', 'nuls']
+  }
   componentDidMount() {
-    // fetch('https://api.coinmarketcap.com/v1/ticker/?limit=500')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //   });
-    const pcElem = document.getElementsByClassName("pc");
-    for (let elem of pcElem) {
-      let price = Number(elem.textContent);
-      if (price > 0) {
-        elem.style.color = "#4ae264";
-      } else if (price < 0) {
-        elem.style.color = "#ff8282";
-      }
-    }
+    axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
+      .then(res => {
+        let allCoinsData = res.data;
+        let coinsData = [];
+        this.state.coinsWatchId.map(id => {
+          let singleCoinData = allCoinsData.filter(coin => coin.id === id);
+          coinsData.push(...singleCoinData);
+        });
+        this.setState({
+          coinsData
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     this.props.state("hold", true);
   }
   render() {
@@ -29,16 +36,17 @@ export default class HoldPriceTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Bitcoin (BTC)</td>
-            <td>$10382</td>
-            <td className="pc">3</td>
-          </tr>
-          <tr>
-            <td>Nuls (NULS)</td>
-            <td>$3.84 / 38012</td>
-            <td className="pc">8</td>
-          </tr>
+        {
+          this.state.coinsData.map((coin, index) => (
+            <CoinRow
+              key={index}
+              name={coin.name}
+              priceUsd={coin.price_usd}
+              priceSats={coin.price_btc}
+              priceChange={coin.percent_change_24h}
+            />
+          ))
+        }
         </tbody>
       </table>
     );

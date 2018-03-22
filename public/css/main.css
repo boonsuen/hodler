@@ -165,3 +165,11 @@ tr:nth-child(odd):not(.row-head) {
 .change, td:last-child {
   width: 25%;
 }
+
+.pc--green {
+  color: #4ae264;
+}
+
+.pc--red {
+  color: #ff8282;
+}
