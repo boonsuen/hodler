@@ -15,6 +15,23 @@ export default class HodlerApp extends React.Component {
       tableDoneRendering
     }));
   };
+  componentDidMount() {
+    // axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
+    //   .then(res => {
+    //     let allCoinsData = res.data;
+    //     let coinsData = [];
+    //     this.state.coinsWatchId.map(id => {
+    //       let singleCoinData = allCoinsData.filter(coin => coin.id === id);
+    //       coinsData.push(...singleCoinData);
+    //     });
+    //     this.setState({
+    //       coinsData
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+  }
   render() {
     return (
       <BrowserRouter>

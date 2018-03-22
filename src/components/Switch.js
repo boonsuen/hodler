@@ -9,7 +9,6 @@ export default class Switch extends React.Component {
     }
   };
   componentDidMount() {
-    console.log(this.props.view);
     if (this.props.view === 'hold') {
       this.setState(() => ({
         classNames: {

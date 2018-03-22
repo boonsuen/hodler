@@ -8,22 +8,22 @@ export default class HoldPriceTable extends React.Component {
     coinsWatchId: ['bitcoin', 'nuls', 'power-ledger', 'wabi']
   }
   componentDidMount() {
-    axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
-      .then(res => {
-        let allCoinsData = res.data;
-        console.log(allCoinsData);
-        let coinsData = [];
-        this.state.coinsWatchId.map(id => {
-          let singleCoinData = allCoinsData.filter(coin => coin.id === id);
-          coinsData.push(...singleCoinData);
-        });
-        this.setState({
-          coinsData
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
+    //   .then(res => {
+    //     let allCoinsData = res.data;
+    //     console.log(allCoinsData);
+    //     let coinsData = [];
+    //     this.state.coinsWatchId.map(id => {
+    //       let singleCoinData = allCoinsData.filter(coin => coin.id === id);
+    //       coinsData.push(...singleCoinData);
+    //     });
+    //     this.setState({
+    //       coinsData
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
     this.props.state("hold", true);
   }
   render() {
