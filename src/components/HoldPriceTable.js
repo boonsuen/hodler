@@ -6,7 +6,7 @@ export default class HoldPriceTable extends React.Component {
   state = {
     coinsData: [],
     coinsWatchId: ['bitcoin', 'nuls', 'power-ledger', 'wabi']
-  }
+  };
   componentDidMount() {
     // axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
     //   .then(res => {

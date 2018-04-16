@@ -9,12 +9,6 @@ export default class HodlerApp extends React.Component {
     view: null,
     tableDoneRendering: false
   };
-  setStates = (view, tableDoneRendering) => {
-    this.setState(() => ({
-      view,
-      tableDoneRendering
-    }));
-  };
   componentDidMount() {
     // axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
     //   .then(res => {
@@ -32,6 +26,12 @@ export default class HodlerApp extends React.Component {
     //     console.log(err);
     //   });
   }
+  setStates = (view, tableDoneRendering) => {
+    this.setState(() => ({
+      view,
+      tableDoneRendering
+    }));
+  };
   render() {
     return (
       <BrowserRouter>

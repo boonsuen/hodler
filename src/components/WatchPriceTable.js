@@ -9,11 +9,11 @@ export default class WatchPriceTable extends React.Component {
       'ethereum', 'ripple',
       'iota', 'cardano',
       'litecoin', 'omisego',
-      'icon', 'ardor', 
+      'icon', 'ardor',
       'raiden-network-token', 'monaco', 
       'substratum', 'ethlend'
     ]
-  }
+  };
   componentDidMount() {
     // axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
     //   .then(res => {
