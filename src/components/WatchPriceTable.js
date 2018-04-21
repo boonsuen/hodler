@@ -10,27 +10,24 @@ export default class WatchPriceTable extends React.Component {
       'iota', 'cardano',
       'litecoin', 'omisego',
       'icon', 'ardor',
-      'raiden-network-token', 'monaco', 
+      'raiden-network-token', 'monaco',
       'substratum', 'ethlend'
     ]
   };
   componentDidMount() {
-    // axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
-    //   .then(res => {
-    //     let allCoinsData = res.data;
-    //     let coinsData = [];
-    //     this.state.coinsWatchId.map(id => {
-    //       let singleCoinData = allCoinsData.filter(coin => coin.id === id);
-    //       coinsData.push(...singleCoinData);
-    //     });
-    //     this.setState({
-    //       coinsData
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
     this.props.state("watch", true);
+  }
+  componentDidUpdate() {
+    if (this.state.coinsData.length === 0 && this.props.coinsData.length > 0) {
+      let filteredCoinsData = [];
+      this.state.coinsWatchId.map(id => {
+        let singleCoinData = this.props.coinsData.filter(coin => coin.id === id);
+        filteredCoinsData.push(...singleCoinData);
+      });
+      this.setState(() => ({
+        coinsData: filteredCoinsData
+      }));
+    }
   }
   render() {
     return (
