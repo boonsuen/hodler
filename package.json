@@ -2,7 +2,6 @@
   "name": "hodler-react",
   "version": "1.0.0",
   "description": "React version of hodler",
-  "homepage": "https://boonsuen.com/hodler-react/",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.18.0",
