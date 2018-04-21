@@ -43,13 +43,12 @@ export default class HodlerApp extends React.Component {
   };
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={'/hodler-react'}>
         <div>
           {this.state.tableDoneRendering && <Switch view={this.state.view} />}
           <RouteSwitch>
             <Route path="/" render={() => <HoldPriceTable state={this.setStates} coinsData={this.state.coinsData} />} exact={true} />
             <Route path="/watch" render={() => <WatchPriceTable state={this.setStates} coinsData={this.state.coinsData} />} />
-            <Route path="/p" component={WatchPriceTable} />
           </RouteSwitch>
         </div>
       </BrowserRouter>
