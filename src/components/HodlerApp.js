@@ -17,7 +17,7 @@ export default class HodlerApp extends React.Component {
         this.setState({
           coinsData: [...res.data]
         });
-        console.log('axios just fetched data!');
+        console.log('axios just fetched data!', process.env);
       })
       .catch(err => {
         console.log(err);
@@ -55,16 +55,3 @@ export default class HodlerApp extends React.Component {
     );
   };
 }
-
-// <BrowserRouter>
-//   <div>
-//     <Header />
-//     <Switch>
-//       <Route path="/" component={ExpenseDashboardPage} exact={true} />
-//       <Route path="/create" component={AddExpensePage} />
-//       <Route path="/edit" component={EditExpensePage} />
-//       <Route path="/help" component={HelpPage} />
-//       <Route component={NotFoundPage} />
-//     </Switch>
-//   </div>
-// </BrowserRouter>

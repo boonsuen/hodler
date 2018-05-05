@@ -38,18 +38,19 @@ export default class HoldPriceTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-        {
-          this.state.coinsData.map((coin, index) => (
-            <CoinRow
-              key={index}
-              name={coin.name}
-              symbol={coin.symbol}
-              priceUsd={coin.price_usd}
-              priceSats={coin.price_btc}
-              priceChange={coin.percent_change_24h}
-            />
-          ))
-        }
+				{
+					this.state.coinsData.map((coin, index) => (
+						<CoinRow
+							key={index}
+							name={coin.name}
+							symbol={coin.symbol}
+							priceUsd={coin.price_usd}
+							priceSats={coin.price_btc}
+							priceChange={coin.percent_change_24h}
+							coinsDataLoaded={this.state.coinsData.length > 0}
+						/>
+					))
+				}
         </tbody>
       </table>
     );
