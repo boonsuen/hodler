@@ -147,19 +147,20 @@ tr:nth-child(odd):not(.row-head) {
   position: relative;
 }
 
-.change::after {
-  transition: opacity .2s;
-  opacity: 0;
-  content: url('../img/sorter.svg');
+.sorter {
   position: absolute;
-  right: 20px;
-  top: 15px;
-  width: 18px;
+  right: 24px;
+  top: 18px;
+  width: 15px;
+  margin-left: 10px;
 }
 
-.change:hover::after {
-  opacity: 1;
+.sorter__up, .sorter__down {
+  fill: #A0C2F9;
   cursor: pointer;
+}
+.sorter__up:hover, .sorter__down:hover {
+  fill: #5892E8;
 }
 
 .change, td:last-child {
