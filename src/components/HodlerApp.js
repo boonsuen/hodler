@@ -43,7 +43,7 @@ export default class HodlerApp extends React.Component {
   };
   render() {
     return (
-      <BrowserRouter basename={'/'}>
+      <BrowserRouter basename={'/hodler-react'}>
         <div>
           {this.state.tableDoneRendering && <Switch view={this.state.view} />}
           <RouteSwitch>
