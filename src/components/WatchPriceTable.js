@@ -12,7 +12,8 @@ export default class WatchPriceTable extends React.Component {
       'icon', 'ardor',
       'raiden-network-token', 'monaco',
       'substratum', 'ethlend'
-    ]
+    ],
+    coinsDataLoaded: false
   };
   componentDidMount() {
     this.props.state("watch", true);
@@ -25,7 +26,8 @@ export default class WatchPriceTable extends React.Component {
         filteredCoinsData.push(...singleCoinData);
       });
       this.setState(() => ({
-        coinsData: filteredCoinsData
+        coinsData: filteredCoinsData,
+        coinsDataLoaded: true
       }));
     }
   }
@@ -77,18 +79,25 @@ export default class WatchPriceTable extends React.Component {
         </thead>
         <tbody>
         {
-          this.state.coinsData.map((coin, index) => (
-            <CoinRow
-              key={index}
-              name={coin.name}
-              symbol={coin.symbol}
-              priceUsd={coin.price_usd}
-              priceSats={coin.price_btc}
-              priceChange={coin.percent_change_24h}
-              coinsDataLoaded={!!this.state.coinsData}
-            />
-          ))
-        }
+					this.state.coinsDataLoaded
+          ? this.state.coinsData.map((coin, index) => (
+  						<CoinRow
+  							key={index}
+  							name={coin.name}
+  							symbol={coin.symbol}
+  							priceUsd={coin.price_usd}
+  							priceSats={coin.price_btc}
+                priceChange={coin.percent_change_24h}
+                coinsDataLoaded={this.state.coinsDataLoaded}
+  						/>
+  					))
+          : this.state.coinsWatchId.map((id, index) => (
+              <CoinRow
+                key={index}
+                coinsDataLoaded={this.state.coinsDataLoaded}
+              />
+            ))
+				}
         </tbody>
       </table>
     );

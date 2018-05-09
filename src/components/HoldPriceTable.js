@@ -10,7 +10,8 @@ export default class HoldPriceTable extends React.Component {
       'nuls',
       'power-ledger',
       'wabi'
-    ]
+    ],
+    coinsDataLoaded: false
   };
   componentDidMount() {
     this.props.state("hold", true);
@@ -23,7 +24,8 @@ export default class HoldPriceTable extends React.Component {
         filteredCoinsData.push(...singleCoinData);
       });
       this.setState(() => ({
-        coinsData: filteredCoinsData
+        coinsData: filteredCoinsData,
+        coinsDataLoaded: true
       }));
     }
   }
@@ -74,18 +76,25 @@ export default class HoldPriceTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-				{
-					this.state.coinsData.map((coin, index) => (
-						<CoinRow
-							key={index}
-							name={coin.name}
-							symbol={coin.symbol}
-							priceUsd={coin.price_usd}
-							priceSats={coin.price_btc}
-              priceChange={coin.percent_change_24h}
-              coinsDataLoaded={!!this.state.coinsData}
-						/>
-					))
+        {
+					this.state.coinsDataLoaded
+          ? this.state.coinsData.map((coin, index) => (
+  						<CoinRow
+  							key={index}
+  							name={coin.name}
+  							symbol={coin.symbol}
+  							priceUsd={coin.price_usd}
+  							priceSats={coin.price_btc}
+                priceChange={coin.percent_change_24h}
+                coinsDataLoaded={this.state.coinsDataLoaded}
+  						/>
+  					))
+          : this.state.coinsWatchId.map((id, index) => (
+              <CoinRow
+                key={index}
+                coinsDataLoaded={this.state.coinsDataLoaded}
+              />
+            ))
 				}
         </tbody>
       </table>

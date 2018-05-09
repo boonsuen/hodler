@@ -17,7 +17,7 @@ export default class HodlerApp extends React.Component {
         this.setState({
           coinsData: [...res.data]
         });
-        console.log('axios just fetched data!');
+        console.log('initial FETCH');
       })
       .catch(err => {
         console.log(err);
@@ -28,7 +28,7 @@ export default class HodlerApp extends React.Component {
           this.setState({
             coinsData: [...res.data]
           });
-          console.log('axios just fetched data!');
+          console.log('setInterval FETCH');
         })
         .catch(err => {
           console.log(err);
@@ -43,7 +43,7 @@ export default class HodlerApp extends React.Component {
   };
   render() {
     return (
-      <BrowserRouter basename={'/hodler-react'}>
+      <BrowserRouter basename={'/'}>
         <div>
           {this.state.tableDoneRendering && <Switch view={this.state.view} />}
           <RouteSwitch>
