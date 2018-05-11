@@ -107,7 +107,7 @@ tr {
 
 th, td {
   text-align: left;
-  padding-left: 30px;
+  padding: 0 0 0 30px;
   border: 1px solid rgba(255,107,0,0.1);
 }
 
@@ -173,4 +173,8 @@ tr:nth-child(odd):not(.row-head) {
 
 .pc--red {
   color: #ff8282;
+}
+
+.svg-tr {
+  line-height: 0;
 }
