@@ -38,7 +38,7 @@ const ChangeLoader = props => (
 		secondaryColor="#ecebeb"
 		{...props}
 	>
-		<rect x="0" y="6" rx="5" ry="5" width="60" height="25" />
+		<rect x="0" y="6" rx="5" ry="5" width="50" height="25" />
 	</ContentLoader>
 );
 
