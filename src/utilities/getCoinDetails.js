@@ -14,6 +14,8 @@ const coinsHoldId = {
   wabi: null
 };
 
+const coinsHoldRank = [];
+
 const coinsWatchWebsiteSlug = [
   'ethereum',
   'ripple',
@@ -42,7 +44,9 @@ const coinsWatchId = {
   monaco: null,
   substratum: null,
   ethlend: null
-}
+};
+
+const coinsWatchRank = [];
 
 let allCoinsData;
 
@@ -66,6 +70,7 @@ axios.get('https://api.coinmarketcap.com/v2/ticker/')
       for (let coinNo in allCoinsData) {
         if (allCoinsData[coinNo].website_slug === slug) {
           coinsHoldId[slug] = allCoinsData[coinNo].id;
+          coinsHoldRank.push(allCoinsData[coinNo].rank);
         }
       }
     });
@@ -73,11 +78,16 @@ axios.get('https://api.coinmarketcap.com/v2/ticker/')
       for (let coinNo in allCoinsData) {
         if (allCoinsData[coinNo].website_slug === slug) {
           coinsWatchId[slug] = allCoinsData[coinNo].id;
+          coinsWatchRank.push(allCoinsData[coinNo].rank);
         }
       }
     });
-    console.log('Coins Hold:', coinsHoldId);
-    console.log('Coins Watch:', coinsWatchId);
+    const allRankRange = [...coinsHoldRank, ...coinsWatchRank].sort((a, b) => a - b);
+    console.log('Coins Hold Id:', coinsHoldId);
+    console.log('Coins Watch Id:', coinsWatchId);
+    console.log('Coins Hold Rank', coinsHoldRank);
+    console.log('Coins Watch Rank', coinsWatchRank);
+    console.log('All Rank Range', allRankRange);
   })
   .catch(err => {
     console.log(err);
