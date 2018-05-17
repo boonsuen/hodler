@@ -42,24 +42,24 @@ const ChangeLoader = props => (
 	</ContentLoader>
 );
 
-const CoinRow = (props) => {
+const CoinRow = ({name, symbol, priceUsd, priceChange, coinsDataLoaded, ...rest}) => {
   let className = 'pc';
-  if (props.priceChange > 0) {
+  if (priceChange > 0) {
     className += ' pc--green';
-  } else if (props.priceChange < 0) {
+  } else if (priceChange < 0) {
     className += ' pc--red';
   }
-  const priceSats = Math.floor(props.priceSats * 100000000);
+  const priceSats = Math.floor(rest.priceSats * 100000000);
   return (
     <React.Fragment>
     {
-      props.coinsDataLoaded
+      coinsDataLoaded
       ?
       (
         <tr>
-          <td>{props.name} ({props.symbol})</td>
-          <td>${props.name === 'Bitcoin' ? props.priceUsd : `${props.priceUsd} / ${priceSats}`}</td>
-          <td className={className}>{props.priceChange}</td>
+          <td>{name} ({symbol})</td>
+          <td>${name === 'Bitcoin' ? priceUsd : `${priceUsd} / ${priceSats}`}</td>
+          <td className={className}>{priceChange}</td>
         </tr>
       )
       :
