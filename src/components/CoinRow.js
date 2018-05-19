@@ -42,14 +42,29 @@ const ChangeLoader = props => (
 	</ContentLoader>
 );
 
-const CoinRow = ({name, symbol, priceUsd, priceChange, coinsDataLoaded, ...rest}) => {
+const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
   let className = 'pc';
   if (priceChange > 0) {
     className += ' pc--green';
   } else if (priceChange < 0) {
     className += ' pc--red';
   }
+	const precisionRound = (number, precision) => {
+	  const factor = Math.pow(10, precision);
+	  return Math.round(number * factor) / factor;
+	}
   const priceSats = Math.floor(rest.priceSats * 100000000);
+	let priceUsd = rest.priceUsd;
+	// const priceUsd = precisionRound(rest.priceUsd, 3);
+	if (priceUsd > 10) {
+		priceUsd = precisionRound(priceUsd, 2);
+	} else if (priceUsd > 1) {
+		priceUsd = precisionRound(priceUsd, 3);
+	} else if (priceUsd > 0.2 ) {
+		priceUsd = precisionRound(priceUsd, 4);
+	} else {
+		priceUsd = precisionRound(priceUsd, 5);
+	}
   return (
     <React.Fragment>
     {
