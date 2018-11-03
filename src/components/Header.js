@@ -35,14 +35,14 @@ const Links = styled.div`
 
 const Logo = styled.img`
   width: 35px;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 `;
 
 const Title = styled.div`
   color: #181B3A;
   font-size: 34px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 19px;
 `;
 
 const StyledHeader = () => (
