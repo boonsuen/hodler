@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "gatsby": "^2.0.38",
+    "gatsby-plugin-layout": "^1.0.6",
     "react": "^16.6.0",
     "react-content-loader": "^3.2.0",
     "react-dom": "^16.6.0",
