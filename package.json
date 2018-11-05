@@ -4,23 +4,22 @@
   "description": "hodler-react",
   "repository": "github:boonsuen/hodler-react",
   "scripts": {
-    "dev": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "format": "prettier --write '**/*.js'"
+    "start": "react-static start",
+    "stage": "react-static build --staging",
+    "build": "react-static build",
+    "serve": "serve dist -p 3001"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "gatsby": "^2.0.38",
-    "gatsby-plugin-layout": "^1.0.6",
-    "react": "^16.6.0",
     "react-content-loader": "^3.2.0",
-    "react-dom": "^16.6.0",
-    "react-helmet": "^5.2.0",
+    "react-static": "^5.9.12",
+    "react-static-plugin-styled-components": "^1.0.6",
     "styled-components": "^4.0.3"
   },
   "devDependencies": {
-    "gatsby-plugin-styled-components": "^3.0.1"
+    "babel-plugin-styled-components": "^1.8.0",
+    "eslint-config-react-tools": "^1.1.6",
+    "serve": "^10.0.2"
   },
   "license": "ISC"
 }
