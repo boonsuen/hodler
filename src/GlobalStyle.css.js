@@ -1,16 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
-import AvenirNextRegularSubsetWoff2 from '../assets/fonts/AvenirNextLTPro-Regular-subset.woff2';
-import AvenirNextRegularSubsetWoff from '../assets/fonts/AvenirNextLTPro-Regular-subset.woff';
+import AvenirNextRegularSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Regular-subset.woff2';
+import AvenirNextRegularSubsetWoff from './assets/fonts/AvenirNextLTPro-Regular-subset.woff';
 
-import AvenirNextMediumSubsetWoff2 from '../assets/fonts/AvenirNextLTPro-Medium-subset.woff2';
-import AvenirNextMediumSubsetWoff from '../assets/fonts/AvenirNextLTPro-Medium-subset.woff';
+import AvenirNextMediumSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Medium-subset.woff2';
+import AvenirNextMediumSubsetWoff from './assets/fonts/AvenirNextLTPro-Medium-subset.woff';
 
-import AvenirNextDemiSubsetWoff2 from '../assets/fonts/AvenirNextLTPro-Demi-subset.woff2';
-import AvenirNextDemiSubsetWoff from '../assets/fonts/AvenirNextLTPro-Demi-subset.woff';
+import AvenirNextDemiSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Demi-subset.woff2';
+import AvenirNextDemiSubsetWoff from './assets/fonts/AvenirNextLTPro-Demi-subset.woff';
 
-import AvenirNextBoldSubsetWoff2 from '../assets/fonts/AvenirNextLTPro-Bold-subset.woff2';
-import AvenirNextBoldSubsetWoff from '../assets/fonts/AvenirNextLTPro-Bold-subset.woff';
+import AvenirNextBoldSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Bold-subset.woff2';
+import AvenirNextBoldSubsetWoff from './assets/fonts/AvenirNextLTPro-Bold-subset.woff';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -49,17 +49,7 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-
-.price-table {
-  box-shadow: 0 2px 27px 7px rgba(3,169,245,0.13);
-  width: 80%;
-  max-width: 720px;
-  margin: 0 auto 80px auto;
-  border-collapse: collapse;
-  border-radius: 10px;
-  box-sizing: border-box;
-}
-
+  
 tr {
   height: 50px;
 }

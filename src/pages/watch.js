@@ -1,15 +1,44 @@
 import React from 'react';
-import { Router } from '@reach/router';
-import Layout from '../components/Layout';
 import PriceTable from '../components/PriceTable';
 
-const WatchPage = () => (
-  <Layout>
-    <Router>
-      <PriceTable path="/watch" view="watch" />
-    </Router>
-  </Layout>
+const Watch = () => (
+  <PriceTable 
+    coinsToRender={[{
+      id: 'ethereum',
+      name: 'Ethereum'
+    }, {
+      id: 'ripple',
+      name: 'Ripple'
+    }, {
+      id: 'iota',
+      name: 'IOTA'
+    }, {
+      id: 'cardono',
+      name: 'Cardano'
+    }, {
+      id: 'litecoin',
+      name: 'Litecoin'
+    }, {
+      id: 'omisego', 
+      name: 'OmiseGO'
+    }, {
+      id: 'icon',
+      name: 'ICON'
+    }, {
+      id: 'ardor',
+      name: 'Ardor',
+    }, {
+      id: 'monaco',
+      name: 'Monaco'
+    }, {
+      id: 'substratum',
+      name: 'Substratum'
+    }, {
+      id: 'ethlend',
+      name: 'ETHLend'
+    }]}
+  />
 );
 
-export default WatchPage;
+export default Watch;
 

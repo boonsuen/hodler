@@ -5,11 +5,13 @@ import CoinRow from './CoinRow';
 export default class HoldPriceTable extends React.Component {
   state = {
     coinsData: [],
-    coinsWatchId: [
-      'bitcoin',
-      'nuls',
-      'power-ledger',
-      'wabi'
+    coinsId: {
+      bitcoin: 1, nuls: 2092,
+      'power-ledger': 2132, wabi: 2267
+    },
+    coinsId2: [
+      1, 2092,
+      2132, 2267
     ],
     coinsDataLoaded: false
   };
@@ -17,11 +19,15 @@ export default class HoldPriceTable extends React.Component {
     this.props.state("hold", true);
   }
   componentDidUpdate() {
-    if (this.state.coinsData.length === 0 && this.props.coinsData.length > 0) {
+    const stateCoinsDataLength = this.state.coinsData.length;
+    const propsCoinsDataLength = Object.keys(this.props.coinsData).length;
+    console.log('stateCoinsDataLength', stateCoinsDataLength);
+    console.log('propsCoinsDataLength', propsCoinsDataLength);
+    if (stateCoinsDataLength < 4 && propsCoinsDataLength === 300) {
       let filteredCoinsData = [];
-      this.state.coinsWatchId.map(id => {
-        let singleCoinData = this.props.coinsData.filter(coin => coin.id === id);
-        filteredCoinsData.push(...singleCoinData);
+      this.state.coinsId2.map((id) => {
+        const matchedCoinData = this.props.coinsData[id];
+        filteredCoinsData.push(matchedCoinData);
       });
       this.setState(() => ({
         coinsData: filteredCoinsData,
@@ -31,20 +37,20 @@ export default class HoldPriceTable extends React.Component {
   }
   handleSortChange = (e) => {
     if (e.target.className.baseVal === 'sorter__up') {
-      const sortedCoinsData = [...this.state.coinsData];
+      const sortedCoinsData = this.state.coinsData;
       sortedCoinsData.map((obj) => {
-        obj.percent_change_24h = Number(obj.percent_change_24h);
+        obj.quotes.USD.percent_change_24h = Number(obj.quotes.USD.percent_change_24h);
       });
-      sortedCoinsData.sort((a, b) => b.percent_change_24h - a.percent_change_24h);
+      sortedCoinsData.sort((a, b) => b.quotes.USD.percent_change_24h - a.quotes.USD.percent_change_24h);
       this.setState(() => ({
         coinsData: sortedCoinsData
       }));
     } else if (e.target.className.baseVal === 'sorter__down') {
       const sortedCoinsData = [...this.state.coinsData];
       sortedCoinsData.map((obj) => {
-        obj.percent_change_24h = Number(obj.percent_change_24h);
+        obj.quotes.USD.percent_change_24h = Number(obj.quotes.USD.percent_change_24h);
       });
-      sortedCoinsData.sort((a, b) => a.percent_change_24h - b.percent_change_24h);
+      sortedCoinsData.sort((a, b) => a.quotes.USD.percent_change_24h - b.quotes.USD.percent_change_24h);
       this.setState(() => ({
         coinsData: sortedCoinsData
       }));
@@ -83,13 +89,13 @@ export default class HoldPriceTable extends React.Component {
   							key={index}
   							name={coin.name}
   							symbol={coin.symbol}
-  							priceUsd={coin.price_usd}
-  							priceSats={coin.price_btc}
-                priceChange={coin.percent_change_24h}
+  							priceUsd={coin.quotes.USD.price}
+  							priceSats={coin.quotes.BTC.price}
+                priceChange={coin.quotes.USD.percent_change_24h}
                 coinsDataLoaded={this.state.coinsDataLoaded}
   						/>
   					))
-          : this.state.coinsWatchId.map((id, index) => (
+          : this.state.coinsId2.map((id, index) => (
               <CoinRow
                 key={index}
                 coinsDataLoaded={this.state.coinsDataLoaded}

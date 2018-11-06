@@ -65,6 +65,7 @@ const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
 	} else {
 		priceUsd = precisionRound(priceUsd, 5);
 	}
+	priceChange = precisionRound(priceChange, 2);
   return (
     <React.Fragment>
     {
@@ -73,7 +74,7 @@ const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
       (
         <tr>
           <td>{name} ({symbol})</td>
-          <td>${name === 'Bitcoin' ? priceUsd : `${priceUsd} / ${priceSats}`}</td>
+          <td>${symbol === 'BTC' ? priceUsd : `${priceUsd} / ${priceSats}`}</td>
           <td className={className}>{priceChange}</td>
         </tr>
       )

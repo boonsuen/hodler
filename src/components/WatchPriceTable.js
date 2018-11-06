@@ -5,13 +5,21 @@ import CoinRow from './CoinRow';
 export default class WatchPriceTable extends React.Component {
   state = {
     coinsData: [],
-    coinsWatchId: [
-      'ethereum', 'ripple',
-      'iota', 'cardano',
-      'litecoin', 'omisego',
-      'icon', 'ardor',
-      'raiden-network-token', 'monaco',
-      'substratum', 'ethlend'
+    coinsId: {
+      ethereum: 1027, ripple: 52,
+      iota: 1720, cardano: 2010,
+      litecoin: 2, omisego: 1808,
+      icon: 2099, ardor: 1320,
+      'raiden-network-token': 2161, monaco: 1776,
+      substratum: 1984, ethlend: 2239
+    },
+    coinsId2: [
+      1027, 52,
+      1720, 2010,
+      2, 1808,
+      2099, 1320,
+      2161, 1776,
+      1984, 2239
     ],
     coinsDataLoaded: false
   };
@@ -19,11 +27,13 @@ export default class WatchPriceTable extends React.Component {
     this.props.state("watch", true);
   }
   componentDidUpdate() {
-    if (this.state.coinsData.length === 0 && this.props.coinsData.length > 0) {
+    const stateCoinsDataLength = this.state.coinsData.length;
+    const propsCoinsDataLength = Object.keys(this.props.coinsData).length;
+    if (stateCoinsDataLength < 4 && propsCoinsDataLength === 300) {
       let filteredCoinsData = [];
-      this.state.coinsWatchId.map(id => {
-        let singleCoinData = this.props.coinsData.filter(coin => coin.id === id);
-        filteredCoinsData.push(...singleCoinData);
+      this.state.coinsId2.map((id) => {
+        const matchedCoinData = this.props.coinsData[id];
+        filteredCoinsData.push(matchedCoinData);
       });
       this.setState(() => ({
         coinsData: filteredCoinsData,
@@ -33,20 +43,20 @@ export default class WatchPriceTable extends React.Component {
   }
   handleSortChange = (e) => {
     if (e.target.className.baseVal === 'sorter__up') {
-      const sortedCoinsData = [...this.state.coinsData];
+      const sortedCoinsData = this.state.coinsData;
       sortedCoinsData.map((obj) => {
-        obj.percent_change_24h = Number(obj.percent_change_24h);
+        obj.quotes.USD.percent_change_24h = Number(obj.quotes.USD.percent_change_24h);
       });
-      sortedCoinsData.sort((a, b) => b.percent_change_24h - a.percent_change_24h);
+      sortedCoinsData.sort((a, b) => b.quotes.USD.percent_change_24h - a.quotes.USD.percent_change_24h);
       this.setState(() => ({
         coinsData: sortedCoinsData
       }));
     } else if (e.target.className.baseVal === 'sorter__down') {
       const sortedCoinsData = [...this.state.coinsData];
       sortedCoinsData.map((obj) => {
-        obj.percent_change_24h = Number(obj.percent_change_24h);
+        obj.quotes.USD.percent_change_24h = Number(obj.quotes.USD.percent_change_24h);
       });
-      sortedCoinsData.sort((a, b) => a.percent_change_24h - b.percent_change_24h);
+      sortedCoinsData.sort((a, b) => a.quotes.USD.percent_change_24h - b.quotes.USD.percent_change_24h);
       this.setState(() => ({
         coinsData: sortedCoinsData
       }));
@@ -85,13 +95,13 @@ export default class WatchPriceTable extends React.Component {
   							key={index}
   							name={coin.name}
   							symbol={coin.symbol}
-  							priceUsd={coin.price_usd}
-  							priceSats={coin.price_btc}
-                priceChange={coin.percent_change_24h}
+                priceUsd={coin.quotes.USD.price}
+  							priceSats={coin.quotes.BTC.price}
+                priceChange={coin.quotes.USD.percent_change_24h}
                 coinsDataLoaded={this.state.coinsDataLoaded}
   						/>
   					))
-          : this.state.coinsWatchId.map((id, index) => (
+          : this.state.coinsId2.map((id, index) => (
               <CoinRow
                 key={index}
                 coinsDataLoaded={this.state.coinsDataLoaded}
