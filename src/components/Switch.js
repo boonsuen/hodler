@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link } from 'react-static';
 import styled from 'styled-components';
 
-const Switch = styled.div`
+const StyledSwitch = styled.div`
   margin: 0 auto 30px auto;
   display: flex;
   width: 199px;
@@ -18,56 +18,28 @@ const Switch = styled.div`
   }
 `;
 
-const StyledLink = styled(({ isActive, children, ...rest }) => (
-  <Link {...rest}>{children}</Link>
-))`
-  background-color: ${props => props.isActive ? "#EE732F" : "none"};
-  color: ${props => props.isActive ? "#fff" : "#EE732F"};
+const NavLink = styled(Link).attrs({
+    activeClassName: 'Switch__NavLink-active'
+})`
+  color: #EE732F;
   border: 1px solid #EE732F;
   transition: all .2s;
 
   &:hover {
-    background-color: ${props => !props.isActive && "rgba(255,107,0,0.1)"};
-    color: ${props => !props.isActive && "#EE732F"};
+    background-color: rgba(255,107,0,0.1);    
+  }
+
+  &.Switch__NavLink-active {
+    background-color: #EE732F;
+    color: #fff;
   }
 `;
 
-class StyledSwitch extends React.Component {
-  getSelectedLink = () => {
-    if (typeof window !== `undefined`) {
-      if (window.location.pathname === '/') {
-        return 'hold'
-      } else if (window.location.pathname === '/watch' || window.location.pathname === '/watch/') {
-        return 'watch'
-      } 
-    }    
-  }
-  state = {
-    selectedLink: this.getSelectedLink()
-  }
-  isActive = (selectedLink) => this.state.selectedLink === selectedLink;
-  handleSwitch = (selectedLink) => {
-    this.setState({selectedLink});
-  }
-  render() {
-    return (
-      <Switch>
-        <StyledLink 
-          isActive={this.isActive('hold')}       
-          onClick={() => {
-            this.handleSwitch('hold')
-          }}  
-          to="/">Holding</StyledLink>
-        <StyledLink 
-          isActive={this.isActive('watch')}
-          onClick={() => {
-            console.log('yo')
-            this.handleSwitch('watch')
-          }} 
-          to="/watch">Watching</StyledLink>
-      </Switch>
-    );
-  }
-}
+const Switch = () => (
+  <StyledSwitch>
+    <NavLink to="/" exact>Holding</NavLink>
+    <NavLink to="/watch">Watching</NavLink>
+  </StyledSwitch>
+);
 
-export default StyledSwitch;
+export default Switch;

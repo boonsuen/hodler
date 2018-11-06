@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch as RouteSwitch} from 'react-router-dom';
+import { Router, Link } from "@reach/router";
 import axios from 'axios';
+
 import Switch from './Switch';
 import HoldPriceTable from './HoldPriceTable';
 import WatchPriceTable from './WatchPriceTable';
@@ -12,28 +13,42 @@ export default class HodlerApp extends React.Component {
     coinsData: []
   };
   componentDidMount() {
-    axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
+    axios.get('https://api.coinmarketcap.com/v2/ticker/?convert=BTC')
       .then(res => {
         this.setState({
-          coinsData: [...res.data]
+          coinsData: res.data.data
         });
-        console.log('initial FETCH');
+        console.log('FETCH 1', Object.keys(this.state.coinsData).length);
+        return axios.get('https://api.coinmarketcap.com/v2/ticker/?convert=BTC&start=101');
+      })
+      .then(res => {
+        this.setState(prevState => ({
+          coinsData: {...prevState.coinsData, ...res.data.data}
+        }));
+        console.log('FETCH 101', Object.keys(this.state.coinsData).length);
+        return axios.get('https://api.coinmarketcap.com/v2/ticker/?convert=BTC&start=201');
+      })
+      .then(res => {
+        this.setState(prevState => ({
+          coinsData: {...prevState.coinsData, ...res.data.data}
+        }));
+        console.log('FETCH 201', Object.keys(this.state.coinsData).length);
       })
       .catch(err => {
         console.log(err);
       });
-    setInterval(() => {
-      axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=300')
-        .then(res => {
-          this.setState({
-            coinsData: [...res.data]
-          });
-          console.log('setInterval FETCH');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }, 10000);
+    // setInterval(() => {
+    //   axios.get('https://api.coinmarketcap.com/v2/ticker/')
+    //     .then(res => {
+    //       this.setState({
+    //         coinsData: res.data.data
+    //       });
+    //       console.log('setInterval FETCH');
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }, 10000);
   }
   setStates = (view, tableDoneRendering) => {
     this.setState(() => ({
@@ -43,15 +58,21 @@ export default class HodlerApp extends React.Component {
   };
   render() {
     return (
-      <BrowserRouter basename={'/hodler-react'}>
-        <div>
-          {this.state.tableDoneRendering && <Switch view={this.state.view} />}
-          <RouteSwitch>
-            <Route path="/" render={() => <HoldPriceTable state={this.setStates} coinsData={this.state.coinsData} />} exact={true} />
-            <Route path="/watch" render={() => <WatchPriceTable state={this.setStates} coinsData={this.state.coinsData} />} />
-          </RouteSwitch>
-        </div>
-      </BrowserRouter>
+      <React.Fragment>
+        {this.state.tableDoneRendering && <Switch view={this.state.view} />}
+          <Router>
+            <HoldPriceTable 
+              path="/"
+              state={this.setStates} 
+              coinsData={this.state.coinsData} 
+            />
+            <WatchPriceTable 
+              path="watch"
+              state={this.setStates} 
+              coinsData={this.state.coinsData} 
+            />
+          </Router>
+      </React.Fragment>
     );
   };
 }
