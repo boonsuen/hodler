@@ -16,10 +16,18 @@ const StyledPriceTable = styled.table`
 
 class PriceTable extends React.Component {
   state = {
-    coinsData: []
+    coinsData: this.props.loaded ? Object.values(this.props.data).filter(coin => {
+      return this.props.coinsToRender.some(id => id === coin.id);
+    }) : []
   }
-  componentDidUpdate(prevProps) {
-    if (Object.keys(this.props.data).length > Object.keys(prevProps.data) || Object.keys(this.props.data).length === 0) {
+  coinsData = this.props.loaded ? Object.values(this.props.data).filter(coin => {
+    return this.props.coinsToRender.some(id => id === coin.id);
+  }) : []
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(this.coinsData);
+    console.log('cMU:', prevProps, prevState, this.state);
+    if (Object.keys(this.props.data).length > Object.keys(prevProps.data).length) {
+      console.log('YOLO');
       this.setState({
         coinsData: Object.values(this.props.data).filter(coin => {
           return this.props.coinsToRender.some(id => id === coin.id);
@@ -28,25 +36,6 @@ class PriceTable extends React.Component {
     }
   }
   handleSortChange = (e) => {
-    if (e.target.className.baseVal === 'sorter__up') {
-      const sortedCoinsData = this.state.coinsData;
-      sortedCoinsData.map((obj) => {
-        obj.quotes.USD.percent_change_24h = Number(obj.quotes.USD.percent_change_24h);
-      });
-      sortedCoinsData.sort((a, b) => b.quotes.USD.percent_change_24h - a.quotes.USD.percent_change_24h);
-      this.setState(() => ({
-        coinsData: sortedCoinsData
-      }));
-    } else if (e.target.className.baseVal === 'sorter__down') {
-      const sortedCoinsData = [...this.state.coinsData];
-      sortedCoinsData.map((obj) => {
-        obj.quotes.USD.percent_change_24h = Number(obj.quotes.USD.percent_change_24h);
-      });
-      sortedCoinsData.sort((a, b) => a.quotes.USD.percent_change_24h - b.quotes.USD.percent_change_24h);
-      this.setState(() => ({
-        coinsData: sortedCoinsData
-      }));
-    };
   };
   render() {
     const { coinsToRender, loaded } = this.props;
@@ -102,7 +91,7 @@ class PriceTable extends React.Component {
 
 export default props => (
   <CoinsDataContext.Consumer>
-    {({ data, loaded }) => {
+    {({ coinsData: data, coinsDataLoaded: loaded }) => {
       return (
         <PriceTable 
           loaded={loaded} 

@@ -22,7 +22,6 @@ export default class App extends React.Component {
   componentDidMount() {
     axios.get('https://hodler-api-goqmromzaq.now.sh')
       .then(res => {
-        console.log(res.data.data);
         this.setState({
           coinsData: res.data.data,
           coinsDataLoaded: true
@@ -44,10 +43,7 @@ export default class App extends React.Component {
           <React.Fragment>
             <Header />
             <Switch />
-            <CoinsDataContext.Provider value={{
-              data: this.state.coinsData,
-              loaded: this.state.coinsDataLoaded
-            }}>
+            <CoinsDataContext.Provider value={this.state}>
               <Routes />
             </CoinsDataContext.Provider>
           </React.Fragment>
