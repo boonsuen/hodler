@@ -14,9 +14,18 @@ const StyledPriceTable = styled.table`
   box-sizing: border-box;
 `;
 
-export default class PriceTable extends React.Component {
+class PriceTable extends React.Component {
   state = {
     coinsData: []
+  }
+  componentDidUpdate(prevProps) {
+    if (Object.keys(this.props.data).length > Object.keys(prevProps.data) || Object.keys(this.props.data).length === 0) {
+      this.setState({
+        coinsData: Object.values(this.props.data).filter(coin => {
+          return this.props.coinsToRender.some(id => id === coin.id);
+        })
+      });
+    }
   }
   handleSortChange = (e) => {
     if (e.target.className.baseVal === 'sorter__up') {
@@ -40,7 +49,7 @@ export default class PriceTable extends React.Component {
     };
   };
   render() {
-    const { coinsToRender } = this.props;
+    const { coinsToRender, loaded } = this.props;
     return (
       <StyledPriceTable>
         <thead>
@@ -66,37 +75,42 @@ export default class PriceTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <CoinsDataContext.Consumer>
-            {({ data, loaded }) => {
-              if (loaded) {
-                const filteredCoinsData = data.filter(coin => {
-                  return coinsToRender.some(e => e.id === coin.id);
-                });
-                console.log(filteredCoinsData);
-                return filteredCoinsData.map((coin, index) => (
-                  <CoinRow
-                    key={`CoinRow-${coin.symbol}`}
-                    name={coin.name}
-                    symbol={coin.symbol.toUpperCase()}
-                    priceUsd={coin.current_price}
-                    priceSats={coin.current_price}
-                    priceChange={coin.price_change_24h}
-                    coinsDataLoaded={loaded}
-                  />
-                ))
-              } else {
-                return coinsToRender.map(coin => (
-                  <CoinRow 
-                    key={`CoinRow-${coin.id}`}
-                    coinsDataLoaded={loaded}
-                  />
-                ))     
-              }    
-            }}
-          </CoinsDataContext.Consumer>
+          {
+            this.props.loaded 
+            ? this.state.coinsData.map(coin => (
+              <CoinRow 
+                key={`CoinRow-${coin.id}`}
+                coinsDataLoaded={loaded}
+                name={coin.name}
+                symbol={coin.symbol}
+                priceUsd={coin.quote.USD.price}
+                priceChange={coin.quote.USD.percent_change_24h}
+              />
+            ))
+            : coinsToRender.map(id => (
+              <CoinRow 
+                key={`CoinRow-${id}`}
+                coinsDataLoaded={loaded}
+              />
+            ))
+          }
         </tbody>
       </StyledPriceTable>
     )
   }
 }
 
+export default props => (
+  <CoinsDataContext.Consumer>
+    {({ data, loaded }) => {
+      return (
+        <PriceTable 
+          loaded={loaded} 
+          coinsToRender={props.coinsToRender} 
+          data={data} 
+          {...props} 
+        />
+      )
+    }}
+  </CoinsDataContext.Consumer>
+);

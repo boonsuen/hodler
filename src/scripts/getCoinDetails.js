@@ -4,14 +4,14 @@ const coinsHoldWebsiteSlug = [
   'bitcoin',
   'nuls',
   'power-ledger',
-  'wabi'
+  'basic-attention-token'
 ];
 
 const coinsHoldId = {
   bitcoin: null,
   nuls: null,
   "power-ledger": null,
-  wabi: null
+  "basic-attention-token": null
 };
 
 const coinsHoldRank = [];
@@ -25,8 +25,7 @@ const coinsWatchWebsiteSlug = [
   'omisego',
   'icon',
   'ardor',
-  'raiden-network-token',
-  'monaco',
+  'crypto-com',
   'substratum',
   'ethlend'
 ];
@@ -40,8 +39,7 @@ const coinsWatchId = {
   omisego: null,
   icon: null,
   ardor: null,
-  "raiden-network-token": null,
-  monaco: null,
+  'crypto-com': null,
   substratum: null,
   ethlend: null
 };
