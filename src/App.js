@@ -20,32 +20,17 @@ export default class App extends React.Component {
     coinsDataLoaded: false
   }
   componentDidMount() {
-    const coinsToFetch = [
-      'bitcoin', 'nuls', 'power-ledger', 'basic-attention-token', 'ethereum', 
-      'ripple', 'iota', 'cardano', 'litecoin', 'omisego', 
-      'icon', 'ardor', 'monaco', 'substratum', 'ethlend'
-    ];
-    axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinsToFetch.toString()}`)
+    axios.get('https://hodler-api-goqmromzaq.now.sh')
       .then(res => {
-        console.log(res.data);
+        console.log(res.data.data);
         this.setState({
-          coinsData: res.data,
+          coinsData: res.data.data,
           coinsDataLoaded: true
-        })
+        });
       })
       .catch(err => {
         console.log(err);
-      });
-    // axios.get(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${coinsToFetch.toString()}&tsyms=USD,BTC`)
-    //   .then(res => {
-    //     this.setState({
-    //       coinsData: res.data.RAW,
-    //       coinsDataLoaded: true
-    //     });
-    //   })
-      // .catch(err => {
-      //   console.log(err);
-      // });
+      });  
   }
   render() {
     return (
