@@ -3,9 +3,6 @@ import { ServerStyleSheet } from 'styled-components';
 
 export default {
   plugins: ['react-static-plugin-styled-components'],
-  siteRoot: "https://boonsuen.com",
-  stagingSiteRoot: "http://localhost:3001",
-  basePath: 'hodler-react',
   getSiteData: () => ({
     title: "Hodler"
   }),
