@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     src: url(${AvenirNextRegularSubsetWoff2}) format('woff2'),
         url(${AvenirNextRegularSubsetWoff}) format('woff');
     font-weight: 400;
+    font-display: fallback;
   }
 
   @font-face {
@@ -25,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     src: url(${AvenirNextMediumSubsetWoff2}) format('woff2'),
         url(${AvenirNextMediumSubsetWoff}) format('woff');
     font-weight: 500;
+    font-display: fallback;
   }
 
   @font-face {
@@ -32,6 +34,7 @@ const GlobalStyle = createGlobalStyle`
     src: url(${AvenirNextDemiSubsetWoff2}) format('woff2'),
         url(${AvenirNextDemiSubsetWoff}) format('woff');
     font-weight: 600;
+    font-display: fallback;
   }
 
   @font-face {
@@ -39,6 +42,7 @@ const GlobalStyle = createGlobalStyle`
     src: url(${AvenirNextBoldSubsetWoff2}) format('woff2'),
         url(${AvenirNextBoldSubsetWoff}) format('woff');
     font-weight: 700;
+    font-display: fallback;
   }
 
   body {
