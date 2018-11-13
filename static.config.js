@@ -3,6 +3,7 @@ import { ServerStyleSheet } from 'styled-components';
 
 export default {
   plugins: ['react-static-plugin-styled-components'],
+  basePath: 'hodler-react',
   getSiteData: () => ({
     title: "Hodler"
   }),
