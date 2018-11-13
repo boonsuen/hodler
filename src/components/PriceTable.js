@@ -20,14 +20,15 @@ class PriceTable extends React.Component {
       return this.props.coinsToRender.some(id => id === coin.id);
     }) : []
   }
-  coinsData = this.props.loaded ? Object.values(this.props.data).filter(coin => {
+  getCoinsData = () => Object.values(this.props.data).filter(coin => {
     return this.props.coinsToRender.some(id => id === coin.id);
-  }) : []
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.coinsData);
-    console.log('cMU:', prevProps, prevState, this.state);
+  })
+  componentDidMount() {
+    this.handleSortChange();
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {    
+    console.log(this.getCoinsData());
     if (Object.keys(this.props.data).length > Object.keys(prevProps.data).length) {
-      console.log('YOLO');
       this.setState({
         coinsData: Object.values(this.props.data).filter(coin => {
           return this.props.coinsToRender.some(id => id === coin.id);
@@ -36,6 +37,7 @@ class PriceTable extends React.Component {
     }
   }
   handleSortChange = (e) => {
+    console.log(this.getCoinsData());
   };
   render() {
     const { coinsToRender, loaded } = this.props;
