@@ -14,7 +14,7 @@
     "react-content-loader": "^3.2.0",
     "react-static": "^5.9.12",
     "react-static-plugin-styled-components": "^1.0.6",
-    "styled-components": "^4.0.3"
+    "styled-components": "^4.1.1"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.8.0",
