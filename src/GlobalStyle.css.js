@@ -12,6 +12,36 @@ import AvenirNextDemiSubsetWoff from './assets/fonts/AvenirNextLTPro-Demi-subset
 import AvenirNextBoldSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Bold-subset.woff2';
 import AvenirNextBoldSubsetWoff from './assets/fonts/AvenirNextLTPro-Bold-subset.woff';
 
+export const fontFaceRules = `
+  @font-face {
+    font-family: "Avenir Next";
+    src: url(${AvenirNextRegularSubsetWoff2}) format('woff2'),
+        url(${AvenirNextRegularSubsetWoff}) format('woff');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "Avenir Next";
+    src: url(${AvenirNextMediumSubsetWoff2}) format('woff2'),
+        url(${AvenirNextMediumSubsetWoff}) format('woff');
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: "Avenir Next";
+    src: url(${AvenirNextDemiSubsetWoff2}) format('woff2'),
+        url(${AvenirNextDemiSubsetWoff}) format('woff');
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: "Avenir Next";
+    src: url(${AvenirNextBoldSubsetWoff2}) format('woff2'),
+        url(${AvenirNextBoldSubsetWoff}) format('woff');
+    font-weight: 700;
+  }
+`;
+
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
