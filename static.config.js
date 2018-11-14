@@ -2,7 +2,7 @@ import React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
 export default {
-  siteRoot: 'boonsuen.com',
+  siteRoot: 'https://boonsuen.com',
   basePath: 'hodler',
   stagingBasePath: '/',
   plugins: ['react-static-plugin-styled-components'],
