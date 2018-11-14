@@ -12,6 +12,11 @@ import AvenirNextDemiSubsetWoff from './assets/fonts/AvenirNextLTPro-Demi-subset
 import AvenirNextBoldSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Bold-subset.woff2';
 import AvenirNextBoldSubsetWoff from './assets/fonts/AvenirNextLTPro-Bold-subset.woff';
 
+// Why are the @font-face rules extracted to be used on its own? 
+// GlobalStyle causes custom fonts to be re-requested when
+// it get rerendered, or some other possible behaviors like
+// rehyration, component state change.
+// This will cause font loading problems like FOIT and FOUT. Bad bad.
 export const fontFaceRules = `
   @font-face {
     font-family: "Avenir Next";
