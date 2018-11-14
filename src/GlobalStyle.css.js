@@ -103,22 +103,6 @@ tr:nth-child(odd):not(.row-head) {
   position: relative;
 }
 
-.sorter {
-  position: absolute;
-  right: 24px;
-  top: 18px;
-  width: 15px;
-  margin-left: 10px;
-}
-
-.sorter__up, .sorter__down {
-  fill: #A0C2F9;
-  cursor: pointer;
-}
-.sorter__up:hover, .sorter__down:hover {
-  fill: #5892E8;
-}
-
 .change, td:last-child {
   width: 25%;
 }
