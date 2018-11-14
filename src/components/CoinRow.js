@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import ContentLoader, { Facebook } from 'react-content-loader'
 
 const MyFacebookLoader = () => <Facebook />
@@ -42,18 +43,21 @@ const ChangeLoader = props => (
 	</ContentLoader>
 );
 
+const PriceChange = styled.td`
+  color: ${props => {
+		if (props.value > 0) {
+			return '#4ae264';
+		} else if (props.value < 0) {
+			return '#ff8282';
+		}
+	}}
+`;
+
 const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
-  let className = 'pc';
-  if (priceChange > 0) {
-    className += ' pc--green';
-  } else if (priceChange < 0) {
-    className += ' pc--red';
-  }
 	const precisionRound = (number, precision) => {
 	  const factor = Math.pow(10, precision);
 	  return Math.round(number * factor) / factor;
 	}
-  const priceSats = Math.floor(rest.priceSats * 100000000);
 	let priceUsd = rest.priceUsd;
 	// const priceUsd = precisionRound(rest.priceUsd, 3);
 	if (priceUsd > 10) {
@@ -74,8 +78,8 @@ const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
       (
         <tr>
           <td>{name} ({symbol})</td>
-          <td>${symbol === 'BTC' ? priceUsd : `${priceUsd} / ${priceSats}`}</td>
-          <td className={className}>{priceChange}</td>
+          <td>${symbol === 'BTC' ? priceUsd : `${priceUsd}`}</td>
+          <PriceChange value={priceChange}>{priceChange}</PriceChange>
         </tr>
       )
       :
