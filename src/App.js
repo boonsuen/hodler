@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Head, Route, cleanPath } from 'react-static';
+import { Router, Head } from 'react-static';
 import Routes from 'react-static-routes';
 import axios from 'axios';
 
