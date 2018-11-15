@@ -57,38 +57,6 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
   
-tr {
-  height: 50px;
-}
-
-th, td {
-  text-align: left;
-  padding: 0 0 0 30px;
-  border: 1px solid rgba(255,107,0,0.1);
-}
-
-th {
-  height: 65px;
-  border-top: none;
-}
-
-th:first-child, td:first-child {
-  border-left: none;
-}
-
-th:last-child, td:last-child {
-  border-right: none;
-}
-
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-tr:nth-child(odd):not(.row-head) {
-  background: #f7feff;
-}
-
 .name, .price, .change {
   color: #65748e;
   font-size: 26px;
@@ -101,22 +69,6 @@ tr:nth-child(odd):not(.row-head) {
 
 .change {
   position: relative;
-}
-
-.change, td:last-child {
-  width: 25%;
-}
-
-.pc--green {
-  color: #4ae264;
-}
-
-.pc--red {
-  color: #ff8282;
-}
-
-.svg-tr {
-  line-height: 0;
 }
 `;
 
