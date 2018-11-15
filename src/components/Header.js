@@ -51,7 +51,7 @@ const StyledHeader = () => (
       <a href="https://github.com/boonsuen/hodler-react" target="_blank">
         <img src={img_github} />
       </a>
-      <a href="https://twitter.com/SatoshiJS" target="_blank">
+      <a href="https://twitter.com/boon_suen" target="_blank">
         <img src={img_twitter} />
       </a>
     </Links>
