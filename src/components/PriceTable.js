@@ -44,6 +44,20 @@ const StyledPriceTable = styled.table`
   }
 `;
 
+const HeaderCell = styled.th`
+  color: #65748e;
+  font-size: 26px;
+  font-weight: 700;
+
+  &:first-child {
+    color: #FF6B00;
+  }
+
+  &:last-child {
+    position: relative;
+  }
+`;
+
 const PriceTable_Tbody = styled.tbody`
   tr:nth-child(odd) {
     background: #f7feff;
@@ -89,12 +103,12 @@ class PriceTable extends React.Component {
       <StyledPriceTable>
         <thead>
           <tr>
-            <th className="name">Name</th>
-            <th className="price">Price</th>
-            <th className="change">
+            <HeaderCell>Name</HeaderCell>
+            <HeaderCell>Price</HeaderCell>
+            <HeaderCell>
               Change
               <Sorter handleSortChange={this.handleSortChange} />
-            </th>
+            </HeaderCell>
           </tr>
         </thead>
         <PriceTable_Tbody>
