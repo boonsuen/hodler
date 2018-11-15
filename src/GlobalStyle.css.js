@@ -56,20 +56,6 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-  
-.name, .price, .change {
-  color: #65748e;
-  font-size: 26px;
-  font-weight: 700;
-}
-
-.name {
-  color: #FF6B00;
-}
-
-.change {
-  position: relative;
-}
 `;
 
 export default GlobalStyle;
