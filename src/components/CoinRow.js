@@ -78,7 +78,7 @@ const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
       (
         <tr>
           <td>{name} ({symbol})</td>
-          <td>${symbol === 'BTC' ? priceUsd : `${priceUsd}`}</td>
+          <td>${priceUsd}</td>
           <PriceChange value={priceChange}>{priceChange}</PriceChange>
         </tr>
       )
