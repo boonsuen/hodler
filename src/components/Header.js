@@ -48,14 +48,14 @@ const Title = styled.div`
 const StyledHeader = () => (
   <Header>
     <Links>
-      <a href="https://github.com/boonsuen/hodler-react" target="_blank">
-        <img src={img_github} />
+      <a href="https://github.com/boonsuen/hodler-react" target="_blank" rel="noopener">
+        <img src={img_github} alt="GitHub icon" />
       </a>
-      <a href="https://twitter.com/boon_suen" target="_blank">
-        <img src={img_twitter} />
+      <a href="https://twitter.com/boon_suen" target="_blank" rel="noopener">
+        <img src={img_twitter} alt="Twitter icon" />
       </a>
     </Links>
-    <Logo src={img_logo} />
+    <Logo src={img_logo} alt="Hodler logo" />
     <Title>Hodler</Title>
   </Header>
 );
