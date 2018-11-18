@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 import AvenirNextRegularSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Regular-subset.woff2';
 import AvenirNextRegularSubsetWoff from './assets/fonts/AvenirNextLTPro-Regular-subset.woff';
@@ -49,6 +49,7 @@ export const fontFaceRules = `
 
 const GlobalStyle = createGlobalStyle`
   body {
+    margin: 0;
     font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
     font-weight: 500;
   }
@@ -57,5 +58,21 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 `;
+
+const sizes = {
+  l: 1000,
+  m: 700,
+  s: 576,
+}
+
+export const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `
+
+  return acc
+}, {})
 
 export default GlobalStyle;

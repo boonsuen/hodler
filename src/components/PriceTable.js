@@ -3,16 +3,22 @@ import styled from 'styled-components';
 import CoinRow from './CoinRow';
 import Sorter from './Sorter';
 
+import { media } from '../GlobalStyle.css';
 import { CoinsDataContext } from '../App';
 
 const StyledPriceTable = styled.table`
   box-shadow: 0 2px 27px 7px rgba(3,169,245,0.13);
   width: 80%;
+  ${media.m`width: 88%;`}
   max-width: 720px;
   margin: 0 auto 80px auto;
   border-collapse: collapse;
   border-radius: 10px;
   box-sizing: border-box;
+
+  ${media.m`
+    font-size: 14px;
+  `}
 
   tr {
     height: 50px;
@@ -28,6 +34,10 @@ const StyledPriceTable = styled.table`
     text-align: left;
     padding: 0 0 0 30px;
     border: 1px solid rgba(255,107,0,0.1);
+
+    ${media.m`
+      padding: 0 10px;
+    `}
     
     &:last-child {
       width: 25%;
@@ -48,6 +58,10 @@ const HeaderCell = styled.th`
   color: #65748e;
   font-size: 26px;
   font-weight: 700;
+
+  ${media.m`
+    font-size: 18px;
+  `}
 
   &:first-child {
     color: #FF6B00;
