@@ -5,24 +5,23 @@ import img_github from '../assets/img/github.svg';
 import img_twitter from '../assets/img/twitter.svg';
 import img_logo from '../assets/img/logo.svg';
 
-const Header = styled.div`
+const StyledHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  height: 160px;
-  position: relative;
+  height: 170px;
   width: 80%;
   max-width: 720px;
   margin: auto;
+  position: relative;
 `;
 
 const Links = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
+  align-self: flex-start;
   display: flex;
   align-items: center;
+  margin-top: 8px;
 
   a {
     margin: 10px 13px 0 0;
@@ -45,8 +44,8 @@ const Title = styled.div`
   margin-bottom: 19px;
 `;
 
-const StyledHeader = () => (
-  <Header>
+const Header = () => (
+  <StyledHeader>
     <Links>
       <a href="https://github.com/boonsuen/hodler-react" target="_blank" rel="noopener">
         <img src={img_github} alt="GitHub icon" />
@@ -57,7 +56,7 @@ const StyledHeader = () => (
     </Links>
     <Logo src={img_logo} alt="Hodler logo" />
     <Title>Hodler</Title>
-  </Header>
+  </StyledHeader>
 );
 
-export default StyledHeader;
+export default Header;
