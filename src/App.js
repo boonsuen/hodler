@@ -38,6 +38,7 @@ export default class App extends React.Component {
           <title>Hodler</title>
           <link rel="icon" href={img_favicon} />
           <style>{fontFaceRules}</style>
+          <meta name="theme-color" content="#FF6B00" />
         </Head>
         <GlobalStyle />        
         <Router>
