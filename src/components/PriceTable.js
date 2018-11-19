@@ -9,25 +9,21 @@ import { CoinsDataContext } from '../App';
 const StyledPriceTable = styled.table`
   box-shadow: 0 2px 27px 7px rgba(3,169,245,0.13);
   width: 80%;
-  ${media.m`width: 88%;`}
   max-width: 720px;
   margin: 0 auto 80px auto;
   border-collapse: collapse;
   border-radius: 10px;
   box-sizing: border-box;
-
+  
   ${media.m`
+    width: 88%;
     font-size: 14px;
   `}
 
   tr {
     height: 50px;
+    ${media.m`height: 46px;`}
     line-height: 0;
-  }
-
-  th {
-    height: 65px;
-    border-top: none;
   }
 
   th, td {
@@ -36,7 +32,7 @@ const StyledPriceTable = styled.table`
     border: 1px solid rgba(255,107,0,0.1);
 
     ${media.m`
-      padding: 0 10px;
+      padding: 0 12px;
     `}
     
     &:last-child {
@@ -49,6 +45,12 @@ const StyledPriceTable = styled.table`
     }
   }
 
+  th {
+    height: 65px;
+    ${media.m`height: 60px;`}
+    border-top: none;
+  }
+
   tr:last-child td {
     border-bottom: none;
   }
@@ -59,9 +61,7 @@ const HeaderCell = styled.th`
   font-size: 26px;
   font-weight: 700;
 
-  ${media.m`
-    font-size: 18px;
-  `}
+  ${media.m`font-size: 18px;`}
 
   &:first-child {
     color: #FF6B00;
