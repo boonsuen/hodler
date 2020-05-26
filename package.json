@@ -10,7 +10,7 @@
     "serve": "serve dist -p 3001"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "react-content-loader": "^4.0.0",
     "react-static": "^5.9.12",
     "react-static-plugin-styled-components": "^6.0.8",
