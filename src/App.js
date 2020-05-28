@@ -8,6 +8,8 @@ import Switch from './components/Switch';
 
 import GlobalStyle, { fontFaceRules } from './GlobalStyle.css';
 import img_favicon from './assets/img/favicon.png';
+import AvenirNextMediumSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Medium-subset.woff2';
+import AvenirNextBoldSubsetWoff2 from './assets/fonts/AvenirNextLTPro-Bold-subset.woff2';
 
 export const CoinsDataContext = React.createContext({  
   data: {},
@@ -36,6 +38,8 @@ export default class App extends React.Component {
       <React.Fragment>
         <Head>
           <title>Hodler</title>
+          <link rel="preload" as="font" href={AvenirNextMediumSubsetWoff2} type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" as="font" href={AvenirNextBoldSubsetWoff2} type="font/woff2" crossOrigin="anonymous" />
           <link rel="icon" href={img_favicon} />
           <style>{fontFaceRules}</style>
           <meta name="theme-color" content="#FF6B00" />
