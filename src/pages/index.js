@@ -1,18 +1,18 @@
 import { useContext } from 'react';
 import Table from '../components/Table';
 
-import { CoinsDataContext, watchingCoinsInfo } from './_app';
+import { CoinsDataContext, mainCoinsInfo } from './_app';
 
-const Watch = () => {
+const Index = () => {
   const { data, isLoading } = useContext(CoinsDataContext);
 
   return (
     <Table 
-      coinsInfo={watchingCoinsInfo}
+      coinsInfo={mainCoinsInfo}
       data={data}
       isLoading={isLoading}
     />
   );
 };
 
-export default Watch;
+export default Index;

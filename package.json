@@ -1,25 +1,26 @@
 {
-  "name": "hodler-react",
+  "name": "hodler",
   "version": "1.0.0",
-  "description": "hodler-react",
-  "repository": "github:boonsuen/hodler-react",
+  "description": "Simple crypto price viewer",
+  "repository": "github:boonsuen/hodler",
   "scripts": {
-    "start": "react-static start",
-    "stage": "react-static build --staging",
-    "build": "react-static build",
-    "serve": "serve dist -p 3001"
+    "dev": "next",
+    "build": "next build",
+    "build-export": "next build && next export",
+    "start": "next start"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "react-content-loader": "^4.0.0",
-    "react-static": "^5.9.12",
-    "react-static-plugin-styled-components": "^6.0.8",
-    "styled-components": "^4.1.3"
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-content-loader": "^4.3.4",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.0",
-    "eslint-config-react-tools": "^1.1.6",
-    "serve": "^10.1.1"
+    "babel-plugin-styled-components": "^1.10.7",
+    "file-loader": "^6.0.0",
+    "url-loader": "^4.1.0"
   },
+  "author": "Boonsuen Oh",
   "license": "ISC"
 }

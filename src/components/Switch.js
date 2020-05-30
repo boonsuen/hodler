@@ -1,12 +1,14 @@
-import React from 'react';
-import { Link } from 'react-static';
 import styled from 'styled-components';
+import ActiveLink from './ActiveLink';
+
+import { media } from './GlobalStyle.css';
 
 const StyledSwitch = styled.div`
   margin: 0 auto 30px auto;
   display: flex;
   width: 199px;
   justify-content: center;
+  ${media.s`width: 180px;`}
   
   a {
     height: 45px;
@@ -15,12 +17,13 @@ const StyledSwitch = styled.div`
     line-height: 45px;
     width: 100px;
     box-sizing: border-box;
+    ${media.s`
+    height: 45px;
+    font-size: 14px;`}
   }
 `;
 
-const NavLink = styled(Link).attrs({
-    activeClassName: 'Switch__NavLink-active'
-})`
+const NavLink = styled.a`
   color: #EE732F;
   border: 1px solid #EE732F;
   transition: all .2s;
@@ -37,8 +40,8 @@ const NavLink = styled(Link).attrs({
 
 const Switch = () => (
   <StyledSwitch>
-    <NavLink to="/" exact>Holding</NavLink>
-    <NavLink to="/watch">Watching</NavLink>
+    <ActiveLink activeClassName="Switch__NavLink-active" href="/" passHref><NavLink>Main</NavLink></ActiveLink>
+    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink>
   </StyledSwitch>
 );
 

@@ -11,6 +11,7 @@ const NameLoader = props => (
 		speed={1.5}
 		primaryColor="#f3f3f3"
 		secondaryColor="#ecebeb"
+    uniquekey="NameLoaderKey"
 		{...props}
 	>
 		<rect x="0" y="12.5" rx="5" ry="5" width="110" height="25" />
@@ -24,6 +25,7 @@ const PriceLoader = props => (
 		speed={1.5}
 		primaryColor="#f3f3f3"
 		secondaryColor="#ecebeb"
+    uniquekey="PriceLoaderKey"
 		{...props}
 	>
 		<rect x="0" y="9" rx="5" ry="5" width="150" height="25" />
@@ -37,6 +39,7 @@ const ChangeLoader = props => (
 		speed={1.5}
 		primaryColor="#f3f3f3"
 		secondaryColor="#ecebeb"
+    uniquekey="ChangeLoaderKey"
 		{...props}
 	>
 		<rect x="0" y="6" rx="5" ry="5" width="50" height="25" />
@@ -53,7 +56,7 @@ const PriceChange = styled.td`
 	}}
 `;
 
-const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
+const Row = ({name, symbol, priceBtc, priceChange, isLoading, ...rest}) => {
 	const precisionRound = (number, precision) => {
 	  const factor = Math.pow(10, precision);
 	  return Math.round(number * factor) / factor;
@@ -73,12 +76,12 @@ const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
   return (
     <React.Fragment>
     {
-      coinsDataLoaded
+      !isLoading
       ?
       (
         <tr>
           <td>{name} ({symbol})</td>
-          <td>${priceUsd}</td>
+          {name === 'Bitcoin' ? <td>${priceUsd}</td> : <td>${priceUsd} / {priceBtc}</td>}
           <PriceChange value={priceChange}>{priceChange}</PriceChange>
         </tr>
       )
@@ -93,4 +96,4 @@ const CoinRow = ({name, symbol, priceChange, coinsDataLoaded, ...rest}) => {
   );
 };
 
-export default CoinRow;
+export default Row;
