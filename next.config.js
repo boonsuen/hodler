@@ -26,4 +26,13 @@ module.exports = {
 
     return config
   },
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return {
+      '/': { page: '/' },
+      '/watch': { page: '/watch' }
+    }
+  },
 }
