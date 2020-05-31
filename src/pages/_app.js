@@ -67,8 +67,8 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Hodler</title>
         <link rel="icon" href={img_favicon} />
-        <link rel="preload" href={ManropeMediumWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href={ManropeExtraBoldWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />        
+        <link rel="preload" href={`${process.env.ASSET_PREFIX}${ManropeMediumWoff2}`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={`${process.env.ASSET_PREFIX}${ManropeExtraBoldWoff2}`} as="font" type="font/woff2" crossOrigin="anonymous" />        
         <style dangerouslySetInnerHTML={{ 
           __html: fontFaceRules 
         }}></style>
