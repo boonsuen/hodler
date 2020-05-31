@@ -31,5 +31,8 @@ module.exports = {
   assetPrefix: isProd ? 'https://boonsuen.com/hodler' : '',
   env: {
     ASSET_PREFIX: isProd ? 'https://boonsuen.com/hodler' : '',
+  },
+  experimental: {
+    basePath: isProd ? '/hodler' : ''
   }
 }
