@@ -61,15 +61,13 @@ const ActiveLink = ({ children, activeClassName, ...props }) => {
         className: className || null,
       })}
     </Link>
-  )
+  );
 }
 
 const Switch = () => (
   <StyledSwitch>
     <ActiveLink activeClassName="Switch__NavLink-active" href="/" passHref><NavLink>Main</NavLink></ActiveLink>
-    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink>
-    {/* <Link href="/"><NavLink>Main</NavLink></Link>
-    <Link href="/watch"><NavLink>Watching</NavLink></Link>  */}
+    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink>  
   </StyledSwitch>
 );
 

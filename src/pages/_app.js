@@ -65,7 +65,8 @@ export default function App({ Component, pageProps }) {
   return (
     <React.Fragment>
       <Head>
-        <title>Hodler</title>
+        <title>Hodler</title>        
+        <meta name="theme-color" content="#FF6B00" />
         <link rel="icon" href={img_favicon} />
         <link rel="preload" href={`${process.env.ASSET_PREFIX}${ManropeMediumWoff2}`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${process.env.ASSET_PREFIX}${ManropeExtraBoldWoff2}`} as="font" type="font/woff2" crossOrigin="anonymous" />        
