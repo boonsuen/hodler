@@ -42,10 +42,26 @@ const NavLink = styled.a`
   }
 `;
 
+const fLink = ({ href, children }) => {
+  const router = useRouter()
+
+  let className = children.props.className || ''
+  if (router.pathname === href) {
+    className = `${className} Switch__NavLink-active`
+  }
+
+  return <Link href={href}>{React.cloneElement(children, { className })}</Link>
+}
+
 const ActiveLink = ({ children, activeClassName, ...props }) => {
   const { asPath } = useRouter()
+  const router = useRouter()
   const child = Children.only(children)
-  const childClassName = child.props.className || ''
+  let childClassName = child.props.className || ''
+
+  if (router.pathname === props.href) {
+    childClassName = `${childClassName} Switch__NavLink-active`
+  }
 
   const className =
     asPath === `${process.env.BASE}${props.href}`
