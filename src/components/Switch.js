@@ -1,6 +1,9 @@
+import React, { Children } from 'react'
 import styled from 'styled-components';
-import ActiveLink from './ActiveLink';
-import Link from './Link';
+// import ActiveLink from './ActiveLink';
+// import Link from './Link';
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { media } from './GlobalStyle.css';
 
@@ -39,12 +42,31 @@ const NavLink = styled.a`
   }
 `;
 
+const ActiveLink = ({ children, activeClassName, ...props }) => {
+  const { asPath } = useRouter()
+  const child = Children.only(children)
+  const childClassName = child.props.className || ''
+
+  const className =
+    asPath === `${process.env.BASE}${props.href}`
+      ? `${childClassName} ${activeClassName}`.trim()
+      : childClassName
+
+  return (
+    <Link {...props}>
+      {React.cloneElement(child, {
+        className: className || null,
+      })}
+    </Link>
+  )
+}
+
 const Switch = () => (
   <StyledSwitch>
-    {/* <ActiveLink activeClassName="Switch__NavLink-active" href="/" passHref><NavLink>Main</NavLink></ActiveLink>
-    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink> */}
-    <Link href="/"><NavLink>Main</NavLink></Link>
-    <Link href="/watch"><NavLink>Watching</NavLink></Link>
+    <ActiveLink activeClassName="Switch__NavLink-active" href="/" passHref><NavLink>Main</NavLink></ActiveLink>
+    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink>
+    {/* <Link href="/"><NavLink>Main</NavLink></Link>
+    <Link href="/watch"><NavLink>Watching</NavLink></Link>  */}
   </StyledSwitch>
 );
 
