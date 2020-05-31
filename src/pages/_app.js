@@ -72,6 +72,15 @@ export default function App({ Component, pageProps }) {
         <style dangerouslySetInnerHTML={{ 
           __html: fontFaceRules 
         }}></style>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+          (function() {
+            if (!location.href.endsWith('/') && location.pathname === '/hodler') {
+              window.location = location.href + '/';
+            }
+          }())
+          `
+        }} />
       </Head>
       <GlobalStyle />
       <Layout>
