@@ -21,8 +21,8 @@ export const fontFaceRules = `
 
   @font-face {
     font-family: "Manrope";
-    src: url(${ManropeExtraBoldWoff2}) format("woff2"),
-        url(${ManropeExtraBoldWoff}) format("woff");
+    src: url(${process.env.ASSET_PREFIX}${ManropeExtraBoldWoff2}) format("woff2"),
+        url(${process.env.ASSET_PREFIX}${ManropeExtraBoldWoff}) format("woff");
     font-weight: 800;
   }
 `;
