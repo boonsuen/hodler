@@ -1,7 +1,5 @@
 import React, { Children } from 'react'
 import styled from 'styled-components';
-// import ActiveLink from './ActiveLink';
-// import Link from './Link';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -41,17 +39,6 @@ const NavLink = styled.a`
     color: #fff;
   }
 `;
-
-const fLink = ({ href, children }) => {
-  const router = useRouter()
-
-  let className = children.props.className || ''
-  if (router.pathname === href) {
-    className = `${className} Switch__NavLink-active`
-  }
-
-  return <Link href={href}>{React.cloneElement(children, { className })}</Link>
-}
 
 const ActiveLink = ({ children, activeClassName, ...props }) => {
   const { asPath } = useRouter()
