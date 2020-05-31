@@ -14,8 +14,8 @@ import ManropeExtraBoldWoff from '../assets/fonts/Manrope-ExtraBold.woff';
 export const fontFaceRules = `
   @font-face {
     font-family: "Manrope";
-    src: url(${ManropeMediumWoff2}) format("woff2"),
-        url(${ManropeMediumWoff}) format("woff");
+    src: url(${process.env.ASSET_PREFIX}${ManropeMediumWoff2}) format("woff2"),
+        url(${process.env.ASSET_PREFIX}${ManropeMediumWoff}) format("woff");
     font-weight: 500;
   }
 
