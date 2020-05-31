@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ActiveLink from './ActiveLink';
+import Link from './Link';
 
 import { media } from './GlobalStyle.css';
 
@@ -40,8 +41,10 @@ const NavLink = styled.a`
 
 const Switch = () => (
   <StyledSwitch>
-    <ActiveLink activeClassName="Switch__NavLink-active" href="/" passHref><NavLink>Main</NavLink></ActiveLink>
-    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink>
+    {/* <ActiveLink activeClassName="Switch__NavLink-active" href="/" passHref><NavLink>Main</NavLink></ActiveLink>
+    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink> */}
+    <Link href="/"><NavLink>Main</NavLink></Link>
+    <Link href="/watch"><NavLink>Watching</NavLink></Link>
   </StyledSwitch>
 );
 
