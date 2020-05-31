@@ -40,8 +40,8 @@ const NavLink = styled.a`
 
 const Switch = () => (
   <StyledSwitch>
-    <ActiveLink activeClassName="Switch__NavLink-active" href="/" passHref><NavLink>Main</NavLink></ActiveLink>
-    <ActiveLink activeClassName="Switch__NavLink-active" href="/watch" passHref><NavLink>Watching</NavLink></ActiveLink>
+    <ActiveLink activeClassName="Switch__NavLink-active" href="./" passHref><NavLink>Main</NavLink></ActiveLink>
+    <ActiveLink activeClassName="Switch__NavLink-active" href="./watch" passHref><NavLink>Watching</NavLink></ActiveLink>
   </StyledSwitch>
 );
 
