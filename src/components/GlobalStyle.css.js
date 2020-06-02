@@ -37,6 +37,11 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  button {
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
+    cursor: pointer;
+  }
 `;
 
 const sizes = {
