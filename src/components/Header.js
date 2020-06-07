@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import useToggle from './useToggle';
 
 import img_github from '../assets/img/github.svg';
 import img_twitter from '../assets/img/twitter.svg';
@@ -59,6 +60,10 @@ const DropdownContainer = styled.div`
 
 const DropdownOpener = styled.button`
   box-shadow: 0 2px 6px rgb(255 178 136 / 25%);
+
+  img {
+    margin-left: 8px;
+  }
 `;
 
 const DropdownList = styled.ul`
@@ -105,11 +110,7 @@ const Title = styled.div`
 `;
 
 const Header = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(open => !open);
-  };
+  const [isDropdownOpen, toggleIsDropdownOpen] = useToggle();
 
   return (
     <StyledHeader>
@@ -123,7 +124,7 @@ const Header = () => {
           </a>
         </SocialLinks>
         <DropdownContainer>
-          <DropdownOpener onClick={toggleDropdown} type="button">Data source<div><img src={img_arrow} /></div></DropdownOpener>
+          <DropdownOpener onClick={toggleIsDropdownOpen} type="button">Data source<div><img src={img_arrow} /></div></DropdownOpener>
           <DropdownList visible={isDropdownOpen ? 1 : 0}>
             <ListItem>
               <button type="button">CoinGecko<div><img src={img_ellipse} /></div></button>
@@ -132,8 +133,7 @@ const Header = () => {
               <button type="button">CoinMarketCap<div><img src={img_ellipse} /></div></button>
             </ListItem>
           </DropdownList>
-        </DropdownContainer>
-        
+        </DropdownContainer>        
       </LinksAndDropdownContainer>    
       <Logo src={img_logo} alt="Logo" />
       <Title>Hodler</Title>
