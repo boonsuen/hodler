@@ -20,6 +20,9 @@
 .env.test.local
 .env.production.local
 
+# environment variables
+/config
+
 # debug
 npm-debug.log*
 yarn-debug.log*
