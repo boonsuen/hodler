@@ -27,7 +27,7 @@ async function handler(req, res) {
     method: 'GET',
     uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
     qs: {
-      id: '1,2092,2132,1697,1027,52,1720,2010,2,1808,2099,1320,1776,1984,2239'      
+      id: '1,1765,2010,1376,1697,2132,2092,2267,1027,52,2,1720,1808,2239,1528,1776,1320'      
     },
     headers: {
       'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY
