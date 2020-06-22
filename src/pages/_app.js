@@ -38,7 +38,7 @@ const mainCoinsIdList = mainCoinsInfo.map(coinObj => coinObj.id);
 const watchingCoinsIdList = watchingCoinsInfo.map(coinObj => coinObj.id);
 const allCoinsIdList = mainCoinsIdList.concat(watchingCoinsIdList);
 const COINGECKO_API_URL = `https://api.coingecko.com/api/v3/simple/price?ids=${allCoinsIdList.join()}&vs_currencies=usd%2Cbtc&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
-const CMC_API_URL = './api/cmc';
+const CMC_API_URL = process.env.CMC_API_URL;
 
 export const CoinsDataContext = React.createContext();
 
@@ -75,8 +75,7 @@ export default function App({ Component, pageProps }) {
       setIsLoadingSec(true);
       if (activeDataSource === 'CoinGecko') {                
         fetchData(COINGECKO_API_URL).then(data => {
-          setData(data);   
-          console.log(data);
+          setData(data);
           setIsLoading(false);  
           setIsLoadingSec(false);                   
         });   
