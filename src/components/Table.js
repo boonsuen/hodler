@@ -79,47 +79,19 @@ const PriceTable_Tbody = styled.tbody`
   }
 `;
 
-const Table = ({ coinsInfo, data, isLoading }) => {
-  const [coinsData, setCoinsData] = useState(isLoading ? [] : coinsInfo.map(coin => {
-    return {
-      ...coin,
-      ...data[coin.id],
-      usd: Number(Math.round(data[coin.id].usd+'e2')+'e-2'),
-      btc: Math.floor(data[coin.id].btc * 100000000),
-      usd_24h_change: Number(Math.round(data[coin.id].usd_24h_change+'e2')+'e-2')
-    }
-  }).sort((a, b) => b.usd_market_cap - a.usd_market_cap));
+const Table = ({ data, setData, isLoading, rowLength, activeDataSource }) => {
   const [lastSortOption, setLastSortOption] = useState('default');
-
-  useEffect(() => {
-    if (Object.keys(data).length > 0) {
-      setCoinsData(coinsInfo.map(coin => {
-        return {
-          ...coin,
-          ...data[coin.id],
-          usd: Number(Math.round(data[coin.id].usd+'e2')+'e-2'),
-          btc: Math.floor(data[coin.id].btc * 100000000),
-          usd_24h_change: Number(Math.round(data[coin.id].usd_24h_change+'e2')+'e-2')
-        }
-      }).sort((a, b) => b.usd_market_cap - a.usd_market_cap))
-    }    
-  }, [data]);
 
   const handleSortChange = (sortOption) => {
     if (sortOption === 'highToLow') {
-      setCoinsData(coinsData => {
-        return coinsData.sort((a, b) => b.usd_24h_change - a.usd_24h_change)
-      });
+      setData(data.sort((a, b) => b.usd_24h_change - a.usd_24h_change));
       setLastSortOption('highToLow');
     } else if (sortOption === 'lowToHigh') {
-      setCoinsData(coinsData => {
-        return coinsData.sort((a, b) => a.usd_24h_change - b.usd_24h_change)
-      });
+      setData(data.sort((a, b) => a.usd_24h_change - b.usd_24h_change));
       setLastSortOption('lowToHigh');
     } else if (sortOption === 'default') {
-      setCoinsData(coinsData => {
-        return coinsData.sort((a, b) => b.usd_market_cap - a.usd_market_cap)
-      });
+      console.log('bhuhu');
+      setData(data.sort((a, b) => b.usd_market_cap - a.usd_market_cap));
       setLastSortOption('default');
     };
   };
@@ -133,6 +105,10 @@ const Table = ({ coinsInfo, data, isLoading }) => {
       handleSortChange('default');
     }
   };
+
+  useEffect(() => {
+    setLastSortOption('default');
+  }, [activeDataSource]);
 
   return (
     <StyledTable>
@@ -153,7 +129,7 @@ const Table = ({ coinsInfo, data, isLoading }) => {
       <PriceTable_Tbody>
         {
           !isLoading 
-          ? coinsData.map(coin => (
+          ? data.map(coin => (
             <Row 
               key={`CoinRow-${coin.id}`}
               isLoading={isLoading}
@@ -164,9 +140,9 @@ const Table = ({ coinsInfo, data, isLoading }) => {
               priceChange={coin.usd_24h_change}
             />
           ))
-          : coinsInfo.map(({ id }) => (
+          : [...Array(rowLength)].map((e, i) => (
             <Row 
-              key={`CoinRow-${id}`}
+              key={`CoinRow-${i}`}
               isLoading={isLoading}
             />
           ))

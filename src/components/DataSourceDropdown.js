@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import useClickOutside from './useClickOutside';
+
+import { CoinsDataContext } from '../pages/_app';
 
 import img_arrow from '../assets/img/datasource_arrow.svg';
 import img_ellipse from '../assets/img/datasource_ellipse.svg';
@@ -79,14 +81,14 @@ const GreenEllipse = ({ isActiveItem }) => (
 
 const ListItem = ({ 
   dataSourceName, 
-  currentActiveDataSource, 
-  setCurrentActiveDataSource 
+  activeDataSource, 
+  setActiveDataSource 
 }) => {
-  const isActiveItem = dataSourceName === currentActiveDataSource;
+  const isActiveItem = dataSourceName === activeDataSource;
 
   const handleDataSourceChange = (e) => {
     if (!isActiveItem) {
-      setCurrentActiveDataSource(dataSourceName);
+      setActiveDataSource(dataSourceName);
     }
   };
 
@@ -102,7 +104,7 @@ const ListItem = ({
 
 const DataSourceDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [currentActiveDataSource, setCurrentActiveDataSource] = useState('CoinGecko');
+  const { activeDataSource, setActiveDataSource } = useContext(CoinsDataContext);
   
   const toggleDropdown = (e) => {
     setIsDropdownOpen(isOpen => !isOpen);
@@ -120,14 +122,14 @@ const DataSourceDropdown = () => {
       </DropdownOpener>
       <DropdownList visible={isDropdownOpen ? 1 : 0}>
         <ListItem 
-          setCurrentActiveDataSource={setCurrentActiveDataSource}
+          setActiveDataSource={setActiveDataSource}
           dataSourceName="CoinGecko" 
-          currentActiveDataSource={currentActiveDataSource} 
+          activeDataSource={activeDataSource} 
         />
         <ListItem 
-          setCurrentActiveDataSource={setCurrentActiveDataSource}
+          setActiveDataSource={setActiveDataSource}
           dataSourceName="CoinMarketCap" 
-          currentActiveDataSource={currentActiveDataSource} 
+          activeDataSource={activeDataSource} 
         />      
       </DropdownList>
     </DropdownContainer>

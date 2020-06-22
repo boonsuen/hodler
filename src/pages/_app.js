@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import GlobalStyle, { fontFaceRules } from '../components/GlobalStyle.css';
@@ -37,30 +37,58 @@ export const watchingCoinsInfo = [
 const mainCoinsIdList = mainCoinsInfo.map(coinObj => coinObj.id);
 const watchingCoinsIdList = watchingCoinsInfo.map(coinObj => coinObj.id);
 const allCoinsIdList = mainCoinsIdList.concat(watchingCoinsIdList);
-const API_URL = `https://api.coingecko.com/api/v3/simple/price?ids=${allCoinsIdList.join()}&vs_currencies=usd%2Cbtc&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+const COINGECKO_API_URL = `https://api.coingecko.com/api/v3/simple/price?ids=${allCoinsIdList.join()}&vs_currencies=usd%2Cbtc&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+const CMC_API_URL = './api/cmc';
 
 export const CoinsDataContext = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [data, setData ] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingSec, setIsLoadingSec] = useState(true);
+  const [activeDataSource, setActiveDataSource] = useState('CoinGecko');
+
+  const fetchData = async (url) => {
+    const response = await fetch(url);
+    if (response.status >= 200 && response.status <= 299) {
+      return await response.json();
+    } else { 
+      alert(`Unable to fetch data. Status Code: ${response.status}`);
+      return; 
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(API_URL);
-      if (response.status >= 200 && response.status <= 299) {
-        return await response.json();
-      } else { 
-        alert(`Unable to fetch data. Status Code: ${response.status}`);
-        return; 
-      }
-    };
-
-    fetchData().then(data => {
+    fetchData(COINGECKO_API_URL).then(data => {
       setData(data);
       setIsLoading(false);
     });
   }, []);
+
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      setIsLoading(true);
+      setIsLoadingSec(true);
+      if (activeDataSource === 'CoinGecko') {                
+        fetchData(COINGECKO_API_URL).then(data => {
+          setData(data);   
+          console.log(data);
+          setIsLoading(false);  
+          setIsLoadingSec(false);                   
+        });   
+      } else {
+        fetchData(CMC_API_URL).then(data => {
+          setData(data.data);       
+          setIsLoading(false);   
+          setIsLoadingSec(false);   
+        });
+      }      
+    }
+  }, [activeDataSource]);
 
   return (
     <React.Fragment>
@@ -84,11 +112,19 @@ export default function App({ Component, pageProps }) {
         }} />
       </Head>
       <GlobalStyle />
-      <Layout>
-        <CoinsDataContext.Provider value={{ data, isLoading }}>
+      <CoinsDataContext.Provider 
+        value={{ 
+          data, 
+          isLoading,
+          activeDataSource,
+          setActiveDataSource,
+          isLoadingSec 
+        }}
+      >
+        <Layout>
           <Component {...pageProps} />
-        </CoinsDataContext.Provider>
-      </Layout>
+        </Layout>
+      </CoinsDataContext.Provider>
     </React.Fragment>
   );
 }

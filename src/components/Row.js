@@ -81,7 +81,7 @@ const Row = ({name, symbol, priceBtc, priceChange, isLoading, ...rest}) => {
       (
         <tr>
           <td>{name} ({symbol})</td>
-          {name === 'Bitcoin' ? <td>${priceUsd}</td> : <td>${priceUsd} / {priceBtc}</td>}
+          {(name === 'Bitcoin' || !priceBtc) ? <td>${priceUsd}</td> : <td>${priceUsd} / {priceBtc}</td>}
           <PriceChange value={priceChange}>{priceChange}</PriceChange>
         </tr>
       )
