@@ -4,8 +4,8 @@ import Layout from '../components/Layout';
 import GlobalStyle, { fontFaceRules } from '../components/GlobalStyle.css';
 
 import img_favicon from '../assets/img/logo.svg';
-import ManropeMediumWoff2 from '../assets/fonts/Manrope-Medium.woff2';
-import ManropeExtraBoldWoff2 from '../assets/fonts/Manrope-ExtraBold.woff2';
+import ManropeMediumWoff2 from '../assets/fonts/Manrope-Medium-subset.woff2';
+import ManropeExtraBoldWoff2 from '../assets/fonts/Manrope-ExtraBold-subset.woff2';
 
 export const mainCoinsInfo = [
   {

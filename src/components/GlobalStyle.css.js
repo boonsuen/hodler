@@ -1,10 +1,10 @@
 import { createGlobalStyle, css } from 'styled-components';
 
-import ManropeMediumWoff2 from '../assets/fonts/Manrope-Medium.woff2';
-import ManropeMediumWoff from '../assets/fonts/Manrope-Medium.woff';
+import ManropeMediumWoff2 from '../assets/fonts/Manrope-Medium-subset.woff2';
+import ManropeMediumWoff from '../assets/fonts/Manrope-Medium-subset.woff';
 
-import ManropeExtraBoldWoff2 from '../assets/fonts/Manrope-ExtraBold.woff2';
-import ManropeExtraBoldWoff from '../assets/fonts/Manrope-ExtraBold.woff';
+import ManropeExtraBoldWoff2 from '../assets/fonts/Manrope-ExtraBold-subset.woff2';
+import ManropeExtraBoldWoff from '../assets/fonts/Manrope-ExtraBold-subset.woff';
 
 // Why are the @font-face rules extracted to be used on its own? 
 // GlobalStyle causes custom fonts to be re-requested when
