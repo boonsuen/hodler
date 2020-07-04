@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useClickOutside from './useClickOutside';
 
 import { CoinsDataContext } from '../pages/_app';
+import { media } from './GlobalStyle.css';
 
 import img_arrow from '../assets/img/datasource_arrow.svg';
 import img_ellipse from '../assets/img/datasource_ellipse.svg';
@@ -17,6 +18,11 @@ const DropdownContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    ${media.s`
+    height: 30px;
+    padding: 0px 8px;
+    font-size: 12px;
+    `}
     
     &:focus {
       outline: none;

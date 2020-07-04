@@ -15,6 +15,7 @@ const StyledHeader = styled.div`
   align-items: center;
   height: 166px;
   ${media.s`height: 150px`};
+  ${media.m`width: 90%;`}
   width: 80%;
   max-width: 720px;
   margin: auto;
