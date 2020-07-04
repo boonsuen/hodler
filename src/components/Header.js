@@ -59,7 +59,7 @@ const Header = () => (
   <StyledHeader>
     <LinksAndDropdownContainer>
       <SocialLinks>
-        <a href="https://github.com/boonsuen/hodler-react" target="_blank" rel="noopener">
+        <a href="https://github.com/boonsuen/hodler" target="_blank" rel="noopener">
           <img src={img_github} alt="GitHub" />
         </a>
         <a href="https://twitter.com/_wnxn" target="_blank" rel="noopener">
