@@ -9,7 +9,7 @@ const StyledTable = styled.table`
   box-shadow: 0 2px 27px 7px rgba(3,169,245,0.13);
   width: 80%;
   max-width: 720px;
-  margin: 0 auto 80px auto;
+  margin: 0 auto 40px auto;
   border-collapse: collapse;
   border-radius: 10px;
   box-sizing: border-box;

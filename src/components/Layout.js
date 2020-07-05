@@ -1,5 +1,6 @@
 import Header from './Header';
 import Switch from './Switch';
+import FooterLinks from './FooterLinks';
 
 export default function Layout({ children }) {
   return (
@@ -7,6 +8,7 @@ export default function Layout({ children }) {
       <Header />
       <Switch />
       {children}
+      <FooterLinks />
     </>
   );
 }

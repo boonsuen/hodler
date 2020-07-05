@@ -22,7 +22,7 @@ const StyledHeader = styled.div`
   position: relative;
 `;
 
-const LinksAndDropdownContainer = styled.div`
+const TopContainer = styled.div`
   align-self: flex-start;
   display: flex;
   justify-content: space-between;
@@ -57,7 +57,7 @@ const Title = styled.div`
 
 const Header = () => (
   <StyledHeader>
-    <LinksAndDropdownContainer>
+    <TopContainer>
       <SocialLinks>
         <a href="https://github.com/boonsuen/hodler" target="_blank" rel="noopener">
           <img src={img_github} alt="GitHub" />
@@ -67,7 +67,7 @@ const Header = () => (
         </a>
       </SocialLinks>
       <DataSourceDropdown />
-    </LinksAndDropdownContainer>    
+    </TopContainer>    
     <Logo src={img_logo} alt="Logo" />
     <Title>Hodler</Title>
   </StyledHeader>
