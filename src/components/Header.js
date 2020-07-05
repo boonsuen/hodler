@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import DataSourceDropdown from './DataSourceDropdown';
 
-import img_github from '../assets/img/github.svg';
-import img_twitter from '../assets/img/twitter.svg';
 import img_logo from '../assets/img/logo.svg';
 
 import { media } from './GlobalStyle.css';
@@ -30,16 +28,6 @@ const TopContainer = styled.div`
   width: 100%;
 `;
 
-const SocialLinks = styled.div`
-  a {
-    margin: 10px 13px 0 0;
-  }
-
-  img {
-    width: 27px;
-  }
-`;
-
 const Logo = styled.img`
   width: 35px;
   margin-bottom: 14px;
@@ -55,17 +43,36 @@ const Title = styled.div`
   ${media.s`font-size: 28px;`}
 `;
 
+const ModeButton = styled.button`
+  height: 100%;
+  padding: 0 10px 0 0;
+  border: none;
+  background: none;
+  outline: none;
+`;
+
+const Mode = () => (
+  <ModeButton>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="9" cy="9" r="9" fill="#B1B6C8" />
+      <path
+        d="M16 9C16 13.0787 12.8659 16 9 16C9 16 9.00005 13.0787 9.00005 9C9.00005 4.92128 9 2 9 2C12.8659 2 16 4.92128 16 9Z"
+        fill="white"
+      />
+    </svg>
+  </ModeButton>
+);
+
 const Header = () => (
   <StyledHeader>
     <TopContainer>
-      <SocialLinks>
-        <a href="https://github.com/boonsuen/hodler" target="_blank" rel="noopener">
-          <img src={img_github} alt="GitHub" />
-        </a>
-        <a href="https://twitter.com/_wnxn" target="_blank" rel="noopener">
-          <img src={img_twitter} alt="Twitter" />
-        </a>
-      </SocialLinks>
+      <Mode />
       <DataSourceDropdown />
     </TopContainer>    
     <Logo src={img_logo} alt="Logo" />
