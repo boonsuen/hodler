@@ -106,7 +106,7 @@ export default function App({ Component, pageProps }) {
             if (!location.href.endsWith('/') && location.pathname === '/hodler') {
               window.location = location.href + '/';
             }
-          }())
+          })()
           `
         }} />
       </Head>
