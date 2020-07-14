@@ -34,6 +34,33 @@ export const watchingCoinsInfo = [
   { id: 'ripple', symbol: 'xrp', name: 'XRP' }
 ];
 
+const COLORS = {
+  '--color-mode-circle': ['#B1B6C8', '#F3F4FE'],
+  '--color-logo-fill': ['#FFF4E1', '#E5E1FF'],
+  '--color-logo-stroke': ['#FF6B00', '#001AFF'],
+  '--color-navlink': ['#EE732F', '#3E50FA'],
+  '--color-table-border': ['rgba(255,107,0,0.1)', '#003CB0'],
+  '--color-sorter': ['#A0C2F9', '#D4DAFB'],
+  '--color-sorter-active': ['#5892E8', '#8893F2'],
+  '--color-loader-primary': ['#f3f3f3', '#6476ad'],
+  '--color-loader-secondary': ['#ecebeb', '#505d84'],
+  '--color-black-white': ['#000', '#fff'],
+  '--color-twitter-icon': ['#00c3ff', '#fff'],
+  '--bg-body': ['white', '#1A1D33'],
+  '--bg-navlink-inactive': ['#fff', '#BEC4FB'],   
+  '--bg-navlink-hover': ['rgba(255,107,0,0.1)', '#E8EAFF'],
+  '--bg-table': ['white', '#090D2C'],
+  '--bg-table-row-odd': ['#f7feff', '#121B3C'],
+  '--bg-footer-links-github': ['#FFF0E8', '#000'],
+  '--bg-footer-links-twitter': ['#FFF0E8', '#0045AC'],
+  '--text-logo-title': ['#181B3A', '#fff'],
+  '--text-header-cell': ['#65748e', '#CBD9F0'],
+  '--text-header-cell-main': ['#FF6B00', '#8F9BFF'],
+  '--text-tbody': ['#000', '#CFD6EF'],
+  '--text-change-green': ['#4ae264', '#84D492'],
+  '--text-change-red': ['#ff8282', '#F19090']
+}
+
 const mainCoinsIdList = mainCoinsInfo.map(coinObj => coinObj.id);
 const watchingCoinsIdList = watchingCoinsInfo.map(coinObj => coinObj.id);
 const allCoinsIdList = mainCoinsIdList.concat(watchingCoinsIdList);
@@ -41,6 +68,58 @@ const COINGECKO_API_URL = `https://api.coingecko.com/api/v3/simple/price?ids=${a
 const CMC_API_URL = process.env.CMC_API_URL;
 
 export const CoinsDataContext = React.createContext();
+export const ThemeContext = React.createContext();
+
+export const ThemeProvider = ({ children }) => {
+  const [
+    colorMode,
+    rawSetColorMode
+  ] = React.useState(undefined);
+
+  React.useEffect(() => {
+    const root = window.document.documentElement;
+    const initialColorValue =
+      root.style.getPropertyValue('--initial-color-mode');
+    rawSetColorMode(initialColorValue);
+  }, []);
+
+  function setColorMode(newValue) {
+    const root = window.document.documentElement;
+
+    rawSetColorMode(newValue);
+    
+    localStorage.setItem('color-mode', newValue);
+    
+    Object.keys(COLORS).map(propertyName => {
+      root.style.setProperty(
+        propertyName,
+        newValue === 'light'
+          ? COLORS[propertyName][0]
+          : COLORS[propertyName][1]
+      );
+    });  
+  }
+
+  useEffect(() => {
+    if (colorMode) {
+      const metaThemeColor = document.querySelector('[name="theme-color"]');
+      const getThemeColor = () => {
+        if (colorMode === 'light') {
+          return '#FF6B00';
+        } else if (colorMode === 'dark') {
+          return '#000326';
+        }      
+      };
+      metaThemeColor.setAttribute('content', getThemeColor());
+    }    
+  }, [colorMode]);
+
+  return (
+    <ThemeContext.Provider value={{ colorMode, setColorMode }}>
+      {children}
+    </ThemeContext.Provider>
+  )
+}
 
 export default function App({ Component, pageProps }) {
   const [data, setData ] = useState({});
@@ -92,8 +171,7 @@ export default function App({ Component, pageProps }) {
   return (
     <React.Fragment>
       <Head>
-        <title>Hodler</title>        
-        <meta name="theme-color" content="#FF6B00" />
+        <title>Hodler</title>
         <link rel="icon" href={img_favicon} />
         <link rel="preload" href={`${process.env.ASSET_PREFIX}${ManropeMediumWoff2}`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${process.env.ASSET_PREFIX}${ManropeExtraBoldWoff2}`} as="font" type="font/woff2" crossOrigin="anonymous" />        
@@ -102,14 +180,55 @@ export default function App({ Component, pageProps }) {
         }}></style>
         <script dangerouslySetInnerHTML={{
           __html: `
-          (function() {
             if (!location.href.endsWith('/') && location.pathname === '/hodler') {
               window.location = location.href + '/';
             }
-          })()
+
+            function getInitialColorMode() {
+              const persistedColorPreference =
+                window.localStorage.getItem('color-mode');
+              const hasPersistedPreference =
+                typeof persistedColorPreference === 'string';
+
+              if (hasPersistedPreference) {
+                return persistedColorPreference;
+              }
+
+              const mql = window.matchMedia('(prefers-color-scheme: dark)');
+              const hasMediaQueryPreference = typeof mql.matches === 'boolean';
+
+              if (hasMediaQueryPreference) {
+                return mql.matches ? 'dark' : 'light';
+              }
+
+              return 'light';
+            }
+
+            const colorMode = getInitialColorMode();
+
+            const root = document.documentElement;
+
+            ${Object.keys(COLORS).map(propertyName => {
+                return `root.style.setProperty(
+                  '${propertyName}',
+                  colorMode === 'light'
+                    ? '${COLORS[propertyName][0]}'
+                    : '${COLORS[propertyName][1]}'
+                );`
+              }).join('')}
+
+            root.style.setProperty('--initial-color-mode', colorMode);
           `
         }} />
       </Head>
+      <script dangerouslySetInnerHTML={{
+          __html: `
+            const metaThemeColor = document.createElement('meta');
+            metaThemeColor.setAttribute('name', 'theme-color');
+            metaThemeColor.setAttribute('content', colorMode == 'light' ? '#FF6B00' : '#000326');
+            document.getElementsByTagName('head')[0].appendChild(metaThemeColor);        
+          `
+        }} />
       <GlobalStyle />
       <CoinsDataContext.Provider 
         value={{ 
@@ -120,9 +239,11 @@ export default function App({ Component, pageProps }) {
           isLoadingSec 
         }}
       >
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ThemeProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </CoinsDataContext.Provider>
     </React.Fragment>
   );

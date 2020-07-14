@@ -14,7 +14,7 @@ const StyledSorter = styled.svg`
 `;
 
 const SorterArrow = styled.path`
-  fill: #A0C2F9;
+  fill: var(--color-sorter);
 
   fill: ${props => {
     if (props.lastSortOption === 'highToLow') {
@@ -26,7 +26,7 @@ const SorterArrow = styled.path`
 const UpArrow = styled(SorterArrow)`
   fill: ${props => {
     if (props.lastSortOption === 'highToLow') {
-      return '#5892E8';
+      return 'var(--color-sorter-active)';
     }
   }};
 `;
@@ -34,7 +34,7 @@ const UpArrow = styled(SorterArrow)`
 const DownArrow = styled(SorterArrow)`
   fill: ${props => {
     if (props.lastSortOption === 'lowToHigh') {
-      return '#5892E8';
+      return 'var(--color-sorter-active)';
     }
   }};
 `;

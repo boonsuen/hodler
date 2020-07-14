@@ -30,8 +30,9 @@ export const fontFaceRules = `
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    background: var(--bg-body);
     font-family: "Manrope", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
-    font-weight: 500;
+    font-weight: 500;    
   }
   
   a {

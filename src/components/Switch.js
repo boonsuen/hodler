@@ -26,16 +26,17 @@ const StyledSwitch = styled.div`
 `;
 
 const NavLink = styled.a`
-  color: #EE732F;
-  border: 1px solid #EE732F;
+  color: var(--color-navlink);
+  border: 1px solid var(--color-navlink);
+  background-color: var(--bg-navlink-inactive);
   transition: all .2s;
 
   &:hover {
-    background-color: rgba(255,107,0,0.1);    
+    background-color: var(--bg-navlink-hover);    
   }
 
   &.Switch__NavLink-active {
-    background-color: #EE732F;
+    background-color: var(--color-navlink);
     color: #fff;
   }
 `;

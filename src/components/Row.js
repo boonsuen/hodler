@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContentLoader, { Facebook } from 'react-content-loader'
-
-const MyFacebookLoader = () => <Facebook />
+import ContentLoader from 'react-content-loader'
 
 const NameLoader = props => (
 	<ContentLoader
 		height={50}
 		width={253}
 		speed={1.5}
-		primaryColor="#f3f3f3"
-		secondaryColor="#ecebeb"
+		primaryColor="var(--color-loader-primary)"
+		secondaryColor="var(--color-loader-secondary)"
     uniquekey="NameLoaderKey"
 		{...props}
 	>
@@ -23,8 +21,8 @@ const PriceLoader = props => (
     height={43}
 		width={225}
 		speed={1.5}
-		primaryColor="#f3f3f3"
-		secondaryColor="#ecebeb"
+		primaryColor="var(--color-loader-primary)"
+		secondaryColor="var(--color-loader-secondary)"
     uniquekey="PriceLoaderKey"
 		{...props}
 	>
@@ -37,8 +35,8 @@ const ChangeLoader = props => (
 		height={38}
 		width={149}
 		speed={1.5}
-		primaryColor="#f3f3f3"
-		secondaryColor="#ecebeb"
+		primaryColor="var(--color-loader-primary)"
+		secondaryColor="var(--color-loader-secondary)"
     uniquekey="ChangeLoaderKey"
 		{...props}
 	>
@@ -49,9 +47,9 @@ const ChangeLoader = props => (
 const PriceChange = styled.td`
   color: ${props => {
 		if (props.value > 0) {
-			return '#4ae264';
+			return 'var(--text-change-green)';
 		} else if (props.value < 0) {
-			return '#ff8282';
+			return 'var(--text-change-red)';
 		}
 	}}
 `;

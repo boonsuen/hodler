@@ -13,6 +13,7 @@ const StyledTable = styled.table`
   border-collapse: collapse;
   border-radius: 10px;
   box-sizing: border-box;
+  background: var(--bg-table);
   
   ${media.m`
     width: 90%;
@@ -28,7 +29,7 @@ const StyledTable = styled.table`
   th, td {
     text-align: left;
     padding: 0 0 0 30px;
-    border: 1px solid rgba(255,107,0,0.1);
+    border: 1px solid var(--color-table-border);
     line-height: 16.1px;
 
     ${media.m`
@@ -55,7 +56,7 @@ const StyledTable = styled.table`
 `;
 
 const HeaderCell = styled.th`
-  color: #65748e;
+  color: var(--text-header-cell);
   font-size: 24px;
   font-weight: 800;
   height: 65px;
@@ -65,7 +66,7 @@ const HeaderCell = styled.th`
   ${media.s`font-size: 16px;`}
 
   &:first-child {
-    color: #FF6B00;
+    color: var(--text-header-cell-main);
   }
 
   &:last-child {
@@ -74,8 +75,10 @@ const HeaderCell = styled.th`
 `;
 
 const PriceTable_Tbody = styled.tbody`
+  color: var(--text-tbody);
+
   tr:nth-child(odd) {
-    background: #f7feff;
+    background: var(--bg-table-row-odd);
   }
 `;
 
@@ -90,7 +93,6 @@ const Table = ({ data, setData, isLoading, rowLength, activeDataSource }) => {
       setData(data.sort((a, b) => a.usd_24h_change - b.usd_24h_change));
       setLastSortOption('lowToHigh');
     } else if (sortOption === 'default') {
-      console.log('bhuhu');
       setData(data.sort((a, b) => b.usd_market_cap - a.usd_market_cap));
       setLastSortOption('default');
     };
