@@ -13,6 +13,7 @@ const DropdownContainer = styled.div`
     color: #181B3A;
     height: 34px;
     border: 1px solid #fff;
+    border-radius: 0;
     background: #fff;
     padding: 0px 12px;
     display: flex;
