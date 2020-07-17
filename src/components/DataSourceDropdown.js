@@ -10,11 +10,11 @@ import img_ellipse from '../assets/img/datasource_ellipse.svg';
 
 const DropdownContainer = styled.div`
   button {
-    color: #181B3A;
+    color: var(--text-logo-title);
     height: 34px;
-    border: 1px solid #fff;
+    border: 1px solid var(--bg-dropdown);
     border-radius: 0;
-    background: #fff;
+    background: var(--bg-dropdown);
     padding: 0px 12px;
     display: flex;
     justify-content: space-between;
@@ -32,7 +32,7 @@ const DropdownContainer = styled.div`
 `;
 
 const DropdownOpener = styled.button`
-  box-shadow: 0 2px 6px rgb(255 178 136 / 25%);
+  box-shadow: var(--shadow-dropdown-opener);
 
   img {
     margin-left: 8px;
@@ -44,7 +44,7 @@ const DropdownList = styled.ul`
   position: absolute;
   right: 0;
   padding: 0;
-  box-shadow: 0 2px 6px rgb(136 198 255 / 25%);
+  box-shadow: var(--shadow-dropdown-list);
   list-style: none;
   transform: ${props => props.visible 
     ? 'translateY(0)'
@@ -62,7 +62,7 @@ const StyledListItem = styled.li`
     width: 100%;
 
     &:hover {
-      border-color: ${props => !props.isActiveItem ? 'rgb(3 169 245 / 13%)' : '#fff'};
+      border-color: ${props => !props.isActiveItem ? 'rgb(3 169 245 / 13%)' : 'var(--bg-dropdown)'};
     }
   }
 

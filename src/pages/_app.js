@@ -35,7 +35,15 @@ export const watchingCoinsInfo = [
 ];
 
 const COLORS = {
-  '--color-mode-circle': ['#B1B6C8', '#F3F4FE'],
+  '--shadow-dropdown-opener': [
+    '0 2px 6px rgb(255 178 136 / 25%)', 
+    'none'
+  ],
+  '--shadow-dropdown-list': [
+    '0 2px 6px rgb(136 198 255 / 25%)', 
+    'none'
+  ],
+  '--color-mode-circle': ['#B1B6C8', '#F3F4FE'],  
   '--color-logo-fill': ['#FFF4E1', '#E5E1FF'],
   '--color-logo-stroke': ['#FF6B00', '#001AFF'],
   '--color-navlink': ['#EE732F', '#3E50FA'],
@@ -47,6 +55,7 @@ const COLORS = {
   '--color-black-white': ['#000', '#fff'],
   '--color-twitter-icon': ['#00c3ff', '#fff'],
   '--bg-body': ['white', '#1A1D33'],
+  '--bg-dropdown': ['#fff', '#434661'],
   '--bg-navlink-inactive': ['#fff', '#BEC4FB'],   
   '--bg-navlink-hover': ['rgba(255,107,0,0.1)', '#E8EAFF'],
   '--bg-table': ['white', '#090D2C'],
