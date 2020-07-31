@@ -34,7 +34,5 @@ module.exports = {
     BASE: isProd ? '/hodler' : '',
     CMC_API_URL: isProd ? 'https://hodler.now.sh/hodler/api/cmc' : './api/cmc'
   },
-  experimental: {
-    basePath: isProd ? '/hodler' : ''
-  }
+  basePath: isProd ? '/hodler' : ''
 }

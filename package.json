@@ -11,16 +11,16 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "next": "^9.4.4",
+    "next": "^9.5.1",
     "react": "^16.13.1",
     "react-content-loader": "^4.3.4",
     "react-dom": "^16.13.1",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5",
+    "request-promise": "^4.2.6",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.7",
+    "babel-plugin-styled-components": "^1.11.1",
     "env-cmd": "^10.1.0",
     "file-loader": "^6.0.0",
     "url-loader": "^4.1.0"
