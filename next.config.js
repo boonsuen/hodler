@@ -32,7 +32,7 @@ module.exports = {
   env: {
     ASSET_PREFIX: isProd ? 'https://boonsuen.com/hodler' : '',
     BASE: isProd ? '/hodler' : '',
-    CMC_API_URL: isProd ? 'https://hodler.now.sh/hodler/api/cmc' : './api/cmc'
+    CMC_API_URL: isProd ? 'https://hodler.vercel.app/hodler/api/cmc' : './api/cmc'
   },
   basePath: isProd ? '/hodler' : ''
 }
