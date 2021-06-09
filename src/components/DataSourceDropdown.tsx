@@ -19,12 +19,12 @@ const DropdownContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    ${media.s`
+    ${media['s']`
     height: 30px;
     padding: 0px 8px;
     font-size: 12px;
     `}
-    
+
     &:focus {
       outline: none;
     }
@@ -40,29 +40,35 @@ const DropdownOpener = styled.button`
   }
 `;
 
-const DropdownList = styled.ul`
+interface DropdownListProps {
+  readonly visible: boolean;
+}
+
+const DropdownList = styled.ul<DropdownListProps>`
   position: absolute;
   right: 0;
   padding: 0;
   box-shadow: var(--shadow-dropdown-list);
   list-style: none;
-  transform: ${props => props.visible 
-    ? 'translateY(0)'
-    : 'translateY(8px)'};
+  transform: ${(props) =>
+    props.visible ? 'translateY(0)' : 'translateY(8px)'};
 
-  visibility: ${props => props.visible ? 'visible' : 'hidden'};
-  opacity: ${props => props.visible ? '1' : '0'};
-  transition: transform .2s ease-in-out, ${props => props.visible
-    ? 'opacity .3s'
-    : 'visibility 0s .3s, opacity .3s'}
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  opacity: ${(props) => (props.visible ? '1' : '0')};
+  transition: transform 0.2s ease-in-out,
+    ${(props) =>
+      props.visible ? 'opacity .3s' : 'visibility 0s .3s, opacity .3s'};
 `;
 
-const StyledListItem = styled.li`
-  button {    
+const StyledListItem = styled.li<{
+  isActiveItem: boolean;
+}>`
+  button {
     width: 100%;
 
     &:hover {
-      border-color: ${props => !props.isActiveItem ? 'rgb(3 169 245 / 13%)' : 'var(--bg-dropdown)'};
+      border-color: ${(props) =>
+        !props.isActiveItem ? 'rgb(3 169 245 / 13%)' : 'var(--bg-dropdown)'};
     }
   }
 
@@ -72,24 +78,27 @@ const StyledListItem = styled.li`
   }
 `;
 
-const StyledGreenEllipse = styled.div`
-  visibility: ${props => props.visible ? 'visible' : 'hidden'};
-  opacity: ${props => props.visible ? '1' : '0'};
-  transition: ${props => props.visible
-    ? 'opacity 0.35s'
-    : 'visibility 0s 0.35s, opacity 0.35s'}
+const StyledGreenEllipse = styled.div<{
+  visible: boolean;
+}>`
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  opacity: ${(props) => (props.visible ? '1' : '0')};
+  transition: ${(props) =>
+    props.visible ? 'opacity 0.35s' : 'visibility 0s 0.35s, opacity 0.35s'};
 `;
 
-const GreenEllipse = ({ isActiveItem }) => (
+const GreenEllipse: React.FC<{
+  isActiveItem: boolean;
+}> = ({ isActiveItem }) => (
   <StyledGreenEllipse visible={isActiveItem}>
     <img src={img_ellipse} />
   </StyledGreenEllipse>
 );
 
-const ListItem = ({ 
-  dataSourceName, 
-  activeDataSource, 
-  setActiveDataSource 
+const ListItem = ({
+  dataSourceName,
+  activeDataSource,
+  setActiveDataSource,
 }) => {
   const isActiveItem = dataSourceName === activeDataSource;
 
@@ -100,7 +109,10 @@ const ListItem = ({
   };
 
   return (
-    <StyledListItem onClick={handleDataSourceChange} isActiveItem={isActiveItem}>
+    <StyledListItem
+      onClick={handleDataSourceChange}
+      isActiveItem={isActiveItem}
+    >
       <button type="button">
         {dataSourceName}
         <GreenEllipse isActiveItem={isActiveItem} />
@@ -109,12 +121,13 @@ const ListItem = ({
   );
 };
 
-const DataSourceDropdown = () => {
+const DataSourceDropdown: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { activeDataSource, setActiveDataSource } = useContext(CoinsDataContext);
-  
+  const { activeDataSource, setActiveDataSource } =
+    useContext(CoinsDataContext);
+
   const toggleDropdown = (e) => {
-    setIsDropdownOpen(isOpen => !isOpen);
+    setIsDropdownOpen((isOpen) => !isOpen);
   };
 
   const clickRef = React.useRef();
@@ -125,19 +138,22 @@ const DataSourceDropdown = () => {
   return (
     <DropdownContainer ref={clickRef}>
       <DropdownOpener onClick={toggleDropdown} type="button">
-        Data source<div><img src={img_arrow} /></div>
+        Data source
+        <div>
+          <img src={img_arrow} />
+        </div>
       </DropdownOpener>
-      <DropdownList visible={isDropdownOpen ? 1 : 0}>
-        <ListItem 
+      <DropdownList visible={isDropdownOpen ? true : false}>
+        <ListItem
           setActiveDataSource={setActiveDataSource}
-          dataSourceName="CoinGecko" 
-          activeDataSource={activeDataSource} 
+          dataSourceName="CoinGecko"
+          activeDataSource={activeDataSource}
         />
-        <ListItem 
+        <ListItem
           setActiveDataSource={setActiveDataSource}
-          dataSourceName="CoinMarketCap" 
-          activeDataSource={activeDataSource} 
-        />      
+          dataSourceName="CoinMarketCap"
+          activeDataSource={activeDataSource}
+        />
       </DropdownList>
     </DropdownContainer>
   );

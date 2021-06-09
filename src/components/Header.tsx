@@ -11,8 +11,8 @@ const StyledHeader = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 166px;
-  ${media.s`height: 150px`};
-  ${media.m`width: 90%;`}
+  ${media['s']`height: 150px`};
+  ${media['m']`width: 90%;`}
   width: 80%;
   max-width: 720px;
   margin: auto;
@@ -33,7 +33,7 @@ const Title = styled.div`
   text-align: center;
   margin-bottom: 19px;
   line-height: 1.15;
-  ${media.s`font-size: 28px;`}
+  ${media['s']`font-size: 28px;`}
 `;
 
 const ModeButton = styled.button`
@@ -73,7 +73,7 @@ const Mode = () => {
 const StyledLogo = styled.svg`
   width: 35px;
   margin-bottom: 14px;
-  ${media.s`width: 32px;`}
+  ${media['s']`width: 32px;`}
 
   .st0 {
     fill:var(--color-logo-fill);
@@ -96,7 +96,7 @@ const StyledLogo = styled.svg`
 
 const Logo = () => (
   <StyledLogo version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-    viewBox="0 0 327.7 368.2" style={{enableBackground: 'new 0 0 327.7 368.2'}} xmlSpace="preserve">    
+    viewBox="0 0 327.7 368.2" xmlSpace="preserve">    
     <rect x="106.8" y="136.4" className="st0" width="206" height="149"/>
     <path className="st1" d="M217,168.9h-3.3c-18.1,0-32.8-14.7-32.8-32.8V49.6c0-18.1,14.7-32.8,32.8-32.8h3.3c18.1,0,32.8,14.7,32.8,32.8
     v86.5C249.8,154.2,235.1,168.9,217,168.9z"/>

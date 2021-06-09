@@ -2,7 +2,11 @@ import Header from './Header';
 import Switch from './Switch';
 import FooterLinks from './FooterLinks';
 
-export default function Layout({ children }) {
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Header />

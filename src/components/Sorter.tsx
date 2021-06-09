@@ -13,35 +13,33 @@ const StyledSorter = styled.svg`
   }
 `;
 
-const SorterArrow = styled.path`
-  fill: var(--color-sorter);
-
+const UpArrow = styled.path<{
+  lastSortOption: string;
+}>`
   fill: ${props => {
     if (props.lastSortOption === 'highToLow') {
-      return ;
+      return 'var(--color-sorter-active)'
+    } else {
+      return 'var(--color-sorter)'
     }
   }};
 `;
 
-const UpArrow = styled(SorterArrow)`
-  fill: ${props => {
-    if (props.lastSortOption === 'highToLow') {
-      return 'var(--color-sorter-active)';
-    }
-  }};
-`;
-
-const DownArrow = styled(SorterArrow)`
+const DownArrow = styled.path<{
+  lastSortOption: string;
+}>`
   fill: ${props => {
     if (props.lastSortOption === 'lowToHigh') {
       return 'var(--color-sorter-active)';
+    } else {
+      return 'var(--color-sorter)'
     }
   }};
 `;
 
 const Sorter = ({ lastSortOption }) => (
   <StyledSorter version="1.1" x="0px" y="0px"
-    viewBox="0 0 194.2 348.7" space="preserve">
+    viewBox="0 0 194.2 348.7">
     <UpArrow
       lastSortOption={lastSortOption}
       d="M86.2,5.6l-83.8,118c-6.3,8.8,0,21,10.9,21h167.5c10.8,0,17.1-12.2,10.9-21L108,5.6

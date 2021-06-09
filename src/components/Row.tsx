@@ -44,7 +44,9 @@ const ChangeLoader = props => (
 	</ContentLoader>
 );
 
-const PriceChange = styled.td`
+const PriceChange = styled.td<{
+	value: number;
+}>`
   color: ${props => {
 		if (props.value > 0) {
 			return 'var(--text-change-green)';
@@ -54,8 +56,18 @@ const PriceChange = styled.td`
 	}}
 `;
 
-const Row = ({name, symbol, priceBtc, priceChange, isLoading, ...rest}) => {
-	const precisionRound = (number, precision) => {
+type RowProps = {
+	key: string;
+	isLoading: boolean;
+	name?: string;
+	symbol?: string;
+	priceUsd?: number;
+	priceBtc?: number;
+	priceChange?: number;
+}
+
+const Row = ({name, symbol, priceBtc, priceChange, isLoading, ...rest}: RowProps) => {
+	const precisionRound = (number: number, precision) => {
 	  const factor = Math.pow(10, precision);
 	  return Math.round(number * factor) / factor;
 	}

@@ -15,14 +15,14 @@ const StyledTable = styled.table`
   box-sizing: border-box;
   background: var(--bg-table);
   
-  ${media.m`
+  ${media['m']`
     width: 90%;
     font-size: 14px;
   `}
 
   tr {
     height: 50px;
-    ${media.m`height: 46px;`}
+    ${media['m']`height: 46px;`}
     line-height: 0;
   }
 
@@ -32,7 +32,7 @@ const StyledTable = styled.table`
     border: 1px solid var(--color-table-border);
     line-height: 16.1px;
 
-    ${media.m`
+    ${media['m']`
       padding: 0 12px;
     `}
     
@@ -60,10 +60,10 @@ const HeaderCell = styled.th`
   font-size: 24px;
   font-weight: 800;
   height: 65px;
-  ${media.m`height: 60px;`}
-  ${media.l`font-size: 20px;`}
-  ${media.m`font-size: 18px;`}
-  ${media.s`font-size: 16px;`}
+  ${media['m']`height: 60px;`}
+  ${media['l']`font-size: 20px;`}
+  ${media['m']`font-size: 18px;`}
+  ${media['s']`font-size: 16px;`}
 
   &:first-child {
     color: var(--text-header-cell-main);

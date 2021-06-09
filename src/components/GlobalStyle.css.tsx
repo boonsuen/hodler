@@ -52,13 +52,13 @@ const sizes = {
 }
 
 export const media = Object.keys(sizes).reduce((acc, label) => {
-  acc[label] = (...args) => css`
-    @media (max-width: ${sizes[label] / 16}em) {
-      ${css(...args)}
+  acc[label] = (...args: any[]) => css`
+    @media (max-width: ${sizes[label] / 16}em) {      
+      ${css.call(undefined, ...args)}
     }
-  `
+  `;
 
-  return acc
-}, {})
+  return acc;
+}, {});
 
 export default GlobalStyle;

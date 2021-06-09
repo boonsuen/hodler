@@ -10,7 +10,7 @@ const StyledSwitch = styled.div`
   display: flex;
   width: 199px;
   justify-content: center;
-  ${media.s`width: 180px;`}
+  ${media['s']`width: 180px;`}
   
   a {
     height: 45px;
@@ -19,7 +19,7 @@ const StyledSwitch = styled.div`
     line-height: 45px;
     width: 100px;
     box-sizing: border-box;
-    ${media.s`
+    ${media['s']`
     height: 45px;
     font-size: 14px;`}
   }
@@ -57,7 +57,7 @@ const ActiveLink = ({ children, activeClassName, ...props }) => {
       : childClassName
 
   return (
-    <Link {...props}>
+    <Link href={props.href} passHref={props.passHref}>
       {React.cloneElement(child, {
         className: className || null,
       })}

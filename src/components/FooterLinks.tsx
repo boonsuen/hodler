@@ -4,7 +4,7 @@ import { media } from './GlobalStyle.css';
 
 const StyledFooterLinks = styled.div`
   width: 80%;
-  ${media.m`width: 90%;`}
+  ${media['m']`width: 90%;`}
   max-width: 720px;
   margin: 0 auto 80px auto;
 `;
@@ -45,7 +45,7 @@ const Link = styled.a`
   }
 `;
 
-const FooterLinks = () => (
+const FooterLinks: React.FC = () => (
   <StyledFooterLinks>
     <LinksWrapper>
       <Link href="https://github.com/boonsuen/hodler" target="_blank" rel="noopener">
@@ -67,7 +67,7 @@ const FooterLinks = () => (
         </svg>
         <span>Twitter</span>
       </Link>
-    </LinksWrapper>      
+    </LinksWrapper>
   </StyledFooterLinks>
 );
 
