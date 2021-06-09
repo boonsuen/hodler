@@ -4,24 +4,22 @@ const url = 'https://api.coingecko.com/api/v3/coins/list';
 const mainCoinsIdList = [
   'bitcoin',
   'nuls',
-  'wabi',
+  'ripple',
   'basic-attention-token',
   'cardano',
   'eos',
   'neo',
-  'power-ledger'
+  'binancecoin',  
 ];
 
 const watchingCoinsIdList = [
   'litecoin',
-  'ripple',
   'ethereum',
   'ardor',
   'iota',
-  'monaco',
   'omisego',
   'icon',
-  'ethlend'
+  'power-ledger',
 ];
 
 https.get(url, res => {

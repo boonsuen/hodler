@@ -7,7 +7,7 @@ const Watch = () => {
   const { data, isLoading, isLoadingSec, activeDataSource } = useContext(CoinsDataContext);
   const isInitialMount = useRef(true);
 
-  const cmcCoinIds = [1027,52,2,1720,1808,2239,2099,1776,1320];
+  const cmcCoinIds = [1027,2,1720,1808,2099,1320,2132];
 
   const prevDataRef = useRef();
   useEffect(() => {

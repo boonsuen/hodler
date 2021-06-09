@@ -1,6 +1,9 @@
 const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
+  future: {
+    webpack5: true,
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|svg|webp|jp2)$/,

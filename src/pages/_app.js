@@ -18,20 +18,18 @@ export const mainCoinsInfo = [
   { id: 'eos', symbol: 'eos', name: 'EOS' },
   { id: 'neo', symbol: 'neo', name: 'NEO' },
   { id: 'nuls', symbol: 'nuls', name: 'Nuls' },
-  { id: 'power-ledger', symbol: 'powr', name: 'Power Ledger' },
-  { id: 'wabi', symbol: 'wabi', name: 'Tael' }
+  { id: 'ripple', symbol: 'xrp', name: 'XRP' },
+  { id: 'binancecoin', symbol: 'bnb', name: 'Binance Coin' },
 ];
 
 export const watchingCoinsInfo = [
   { id: 'ardor', symbol: 'ardr', name: 'Ardor' },
   { id: 'ethereum', symbol: 'eth', name: 'Ethereum' },
-  { id: 'ethlend', symbol: 'lend', name: 'Aave' },
   { id: 'icon', symbol: 'icx', name: 'ICON' },
   { id: 'iota', symbol: 'miota', name: 'IOTA' },
   { id: 'litecoin', symbol: 'ltc', name: 'Litecoin' },
-  { id: 'monaco', symbol: 'mco', name: 'MCO' },
   { id: 'omisego', symbol: 'omg', name: 'OmiseGO' },
-  { id: 'ripple', symbol: 'xrp', name: 'XRP' }
+  { id: 'power-ledger', symbol: 'powr', name: 'Power Ledger' }
 ];
 
 const COLORS = {

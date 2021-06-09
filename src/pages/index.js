@@ -8,7 +8,7 @@ const Index = () => {
   const { data, isLoading, isLoadingSec, activeDataSource } = useContext(CoinsDataContext);
   const isInitialMount = useRef(true);
 
-  const cmcCoinIds = [1,1765,2010,1376,1697,2132,2092,2267];
+  const cmcCoinIds = [1,1839,1765,2010,52,1376,1697,2092];
 
   const prevDataRef = useRef();
   useEffect(() => {
