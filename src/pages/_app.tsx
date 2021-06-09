@@ -76,8 +76,13 @@ type CoinsDataContextType = {
   setActiveDataSource
 };
 
+type ThemeContextType = {
+  colorMode, 
+  setColorMode
+}
+
 export const CoinsDataContext = React.createContext<Partial<CoinsDataContextType>>({});
-export const ThemeContext = React.createContext({});
+export const ThemeContext = React.createContext<Partial<ThemeContextType>>({});
 
 export const ThemeProvider = ({ children }) => {
   const [colorMode, rawSetColorMode] = React.useState(undefined);
