@@ -85,13 +85,14 @@ const StyledGreenEllipse = styled.div<{
   opacity: ${(props) => (props.visible ? '1' : '0')};
   transition: ${(props) =>
     props.visible ? 'opacity 0.35s' : 'visibility 0s 0.35s, opacity 0.35s'};
+  ${(props) => props.visible && ('pointer-events: none;')}
 `;
 
 const GreenEllipse: React.FC<{
   isActiveItem: boolean;
 }> = ({ isActiveItem }) => (
   <StyledGreenEllipse visible={isActiveItem}>
-    <img src={img_ellipse} />
+    <img src={img_ellipse} alt="green circle indicator" />
   </StyledGreenEllipse>
 );
 
