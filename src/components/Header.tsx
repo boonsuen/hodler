@@ -52,7 +52,7 @@ const Mode = () => {
       setColorMode('dark');
   };
   return (
-    <ModeButton onClick={handleSwitchColorMode}>
+    <ModeButton onClick={handleSwitchColorMode} aria-label="Switch theme">
       <svg
         width="18"
         height="18"

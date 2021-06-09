@@ -137,7 +137,7 @@ export default function App({ Component, pageProps }) {
   const [isLoadingSec, setIsLoadingSec] = useState(true);
   const [activeDataSource, setActiveDataSource] = useState('CoinGecko');
 
-  const fetchData = async (url) => {
+  const fetchData = async (url: string) => {
     const response = await fetch(url);
     if (response.status >= 200 && response.status <= 299) {
       return await response.json();

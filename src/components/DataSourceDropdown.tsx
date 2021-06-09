@@ -140,7 +140,7 @@ const DataSourceDropdown: React.FC = () => {
       <DropdownOpener onClick={toggleDropdown} type="button">
         Data source
         <div>
-          <img src={img_arrow} />
+          <img src={img_arrow} alt="Down arrow, open menu" />
         </div>
       </DropdownOpener>
       <DropdownList visible={isDropdownOpen ? true : false}>
