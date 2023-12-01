@@ -1,150 +1,134 @@
-import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
-import useClickOutside from './useClickOutside';
+import React, {
+  useState,
+  useContext,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+import useClickOutside from '../hooks/useClickOutside';
 
-import { CoinsDataContext } from '../pages/_app';
-import { media } from './GlobalStyle.css';
+import { DataSource } from '@/types';
+import clsx from 'clsx';
+import {
+  CoinsDataContext,
+  CoinsDataContextType,
+} from '@/context/CoinsDataContext';
 
-import img_arrow from '../assets/img/datasource_arrow.svg';
-import img_ellipse from '../assets/img/datasource_ellipse.svg';
-
-const DropdownContainer = styled.div`
-  button {
-    color: var(--text-logo-title);
-    height: 34px;
-    border: 1px solid var(--bg-dropdown);
-    border-radius: 0;
-    background: var(--bg-dropdown);
-    padding: 0px 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    ${media['s']`
-    height: 30px;
-    padding: 0px 8px;
-    font-size: 12px;
-    `}
-
-    &:focus {
-      outline: none;
-    }
-  }
-`;
-
-const DropdownOpener = styled.button`
-  box-shadow: var(--shadow-dropdown-opener);
-
-  img {
-    margin-left: 8px;
-    transition: opacity 1s;
-  }
-`;
-
-interface DropdownListProps {
-  readonly visible: boolean;
-}
-
-const DropdownList = styled.ul<DropdownListProps>`
-  position: absolute;
-  right: 0;
-  padding: 0;
-  box-shadow: var(--shadow-dropdown-list);
-  list-style: none;
-  transform: ${(props) =>
-    props.visible ? 'translateY(0)' : 'translateY(8px)'};
-
-  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
-  opacity: ${(props) => (props.visible ? '1' : '0')};
-  transition: transform 0.2s ease-in-out,
-    ${(props) =>
-      props.visible ? 'opacity .3s' : 'visibility 0s .3s, opacity .3s'};
-`;
-
-const StyledListItem = styled.li<{
-  isActiveItem: boolean;
-}>`
-  button {
-    width: 100%;
-
-    &:hover {
-      border-color: ${(props) =>
-        !props.isActiveItem ? 'rgb(3 169 245 / 13%)' : 'var(--bg-dropdown)'};
-    }
-  }
-
-  div {
-    margin-left: 8px;
-    width: 8px;
-  }
-`;
-
-const StyledGreenEllipse = styled.div<{
-  visible: boolean;
-}>`
-  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
-  opacity: ${(props) => (props.visible ? '1' : '0')};
-  transition: ${(props) =>
-    props.visible ? 'opacity 0.35s' : 'visibility 0s 0.35s, opacity 0.35s'};
-  ${(props) => props.visible && ('pointer-events: none;')}
-`;
+// const DropdownList = styled.ul<DropdownListProps>`
+//   transform: ${(props) =>
+//     props.visible ? 'translateY(0)' : 'translateY(8px)'};
+//   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+//   opacity: ${(props) => (props.visible ? '1' : '0')};
+//   transition: transform 0.2s ease-in-out,
+//     ${(props) =>
+//       props.visible ? 'opacity .3s' : 'visibility 0s .3s, opacity .3s'};
+// `;
 
 const GreenEllipse: React.FC<{
   isActiveItem: boolean;
 }> = ({ isActiveItem }) => (
-  <StyledGreenEllipse visible={isActiveItem}>
-    <img src={img_ellipse} alt="green circle indicator" />
-  </StyledGreenEllipse>
+  <div
+    className={clsx('ml-2 w-2', isActiveItem && 'pointer-events-none')}
+    style={{
+      visibility: isActiveItem ? 'visible' : 'hidden',
+      opacity: isActiveItem ? '1' : '0',
+      transition: isActiveItem
+        ? 'opacity 0.35s'
+        : 'visibility 0s 0.35s, opacity 0.35s',
+    }}
+  >
+    <img src="/img/datasource_ellipse.svg" alt="green circle indicator" />
+  </div>
 );
 
 const ListItem = ({
   dataSourceName,
   activeDataSource,
   setActiveDataSource,
+}: {
+  dataSourceName: DataSource;
+  activeDataSource: DataSource;
+  setActiveDataSource: Dispatch<SetStateAction<DataSource>>;
 }) => {
   const isActiveItem = dataSourceName === activeDataSource;
 
-  const handleDataSourceChange = (e) => {
+  const handleDataSourceChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!isActiveItem) {
       setActiveDataSource(dataSourceName);
     }
   };
 
   return (
-    <StyledListItem
-      onClick={handleDataSourceChange}
-      isActiveItem={isActiveItem}
-    >
-      <button type="button">
+    <li>
+      <button
+        className={clsx(
+          'text-[var(--text-logo-title)] h-[34px] px-3 bg-[var(--bg-dropdown)]',
+          'flex justify-between items-center border border-[--bg-dropdown]',
+          'max-[550px]:h-[30px] max-[550px]:px-2 max-[550px]:text-[12px] w-full',
+          isActiveItem
+            ? 'hover:border-[var(--bg-dropdown)]'
+            : 'hover:border-[rgba(3,169,245,0.13)]'
+        )}
+        type="button"
+        onClick={handleDataSourceChange}
+      >
         {dataSourceName}
         <GreenEllipse isActiveItem={isActiveItem} />
       </button>
-    </StyledListItem>
+    </li>
   );
 };
 
 const DataSourceDropdown: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { activeDataSource, setActiveDataSource } =
-    useContext(CoinsDataContext);
+  const { activeDataSource, setActiveDataSource } = useContext(
+    CoinsDataContext
+  ) as CoinsDataContextType;
 
-  const toggleDropdown = (e) => {
+  const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsDropdownOpen((isOpen) => !isOpen);
   };
 
-  const clickRef = React.useRef();
+  const clickRef = useRef(null);
   useClickOutside(clickRef, () => {
     setIsDropdownOpen(false);
   });
 
   return (
-    <DropdownContainer ref={clickRef}>
-      <DropdownOpener onClick={toggleDropdown} type="button">
+    <div ref={clickRef} className="text-sm">
+      <button
+        onClick={toggleDropdown}
+        type="button"
+        className={clsx(
+          'text-[var(--text-logo-title)] h-[34px] px-3 bg-[var(--bg-dropdown)]',
+          'flex justify-between items-center border border-[--bg-dropdown]',
+          'max-[550px]:h-[30px] max-[550px]:px-2 max-[550px]:text-[12px]'
+        )}
+        style={{
+          boxShadow: 'var(--shadow-dropdown-opener)',
+        }}
+      >
         Data source
         <div>
-          <img src={img_arrow} alt="Down arrow, open menu" />
+          <img
+            className="ml-2 transition-opacity duration-1000"
+            src="/img/datasource_arrow.svg"
+            alt="Down arrow, open menu"
+          />
         </div>
-      </DropdownOpener>
-      <DropdownList visible={isDropdownOpen ? true : false}>
+      </button>
+      <ul
+        className="my-4 absolute p-0 right-0 list-none"
+        style={{
+          boxShadow: 'var(--shadow-dropdown-list)',
+          transform: isDropdownOpen ? 'translateY(0)' : 'translateY(8px)',
+          visibility: isDropdownOpen ? 'visible' : 'hidden',
+          opacity: isDropdownOpen ? '1' : '0',
+          transition: isDropdownOpen
+            ? 'transform 0.2s ease-in-out, opacity 0.3s'
+            : 'transform 0.2s ease-in-out, visibility 0s 0.3s, opacity 0.3s',
+        }}
+      >
         <ListItem
           setActiveDataSource={setActiveDataSource}
           dataSourceName="CoinGecko"
@@ -155,8 +139,8 @@ const DataSourceDropdown: React.FC = () => {
           dataSourceName="CoinMarketCap"
           activeDataSource={activeDataSource}
         />
-      </DropdownList>
-    </DropdownContainer>
+      </ul>
+    </div>
   );
 };
 

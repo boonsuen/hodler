@@ -1,101 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Sorter from './Sorter';
 import Row from './Row';
+import clsx from 'clsx';
+import { SortOption } from '@/types';
 
-import { media } from './GlobalStyle.css';
+const Table = ({
+  data,
+  setData,
+  isLoading,
+  rowLength,
+  activeDataSource,
+}: {
+  data: any;
+  setData: any;
+  isLoading: boolean;
+  rowLength: number;
+  activeDataSource: string;
+}) => {
+  const [lastSortOption, setLastSortOption] = useState<SortOption>('default');
 
-const StyledTable = styled.table`
-  box-shadow: 0 2px 27px 7px rgba(3,169,245,0.13);
-  width: 80%;
-  max-width: 720px;
-  margin: 0 auto 40px auto;
-  border-collapse: collapse;
-  border-radius: 10px;
-  box-sizing: border-box;
-  background: var(--bg-table);
-  
-  ${media['m']`
-    width: 90%;
-    font-size: 14px;
-  `}
-
-  tr {
-    height: 50px;
-    ${media['m']`height: 46px;`}
-    line-height: 0;
-  }
-
-  th, td {
-    text-align: left;
-    padding: 0 0 0 30px;
-    border: 1px solid var(--color-table-border);
-    line-height: 16.1px;
-
-    ${media['m']`
-      padding: 0 12px;
-    `}
-    
-    &:last-child {
-      width: 25%;
-      border-right: none;
-    }
-
-    &:first-child {
-      border-left: none;
-    }
-  }
-
-  th {
-    border-top: none;
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-  }
-`;
-
-const HeaderCell = styled.th`
-  color: var(--text-header-cell);
-  font-size: 24px;
-  font-weight: 800;
-  height: 65px;
-  ${media['m']`height: 60px;`}
-  ${media['l']`font-size: 20px;`}
-  ${media['m']`font-size: 18px;`}
-  ${media['s']`font-size: 16px;`}
-
-  &:first-child {
-    color: var(--text-header-cell-main);
-  }
-
-  &:last-child {
-    position: relative;
-  }
-`;
-
-const PriceTable_Tbody = styled.tbody`
-  color: var(--text-tbody);
-
-  tr:nth-child(odd) {
-    background: var(--bg-table-row-odd);
-  }
-`;
-
-const Table = ({ data, setData, isLoading, rowLength, activeDataSource }) => {
-  const [lastSortOption, setLastSortOption] = useState('default');
-
-  const handleSortChange = (sortOption) => {
+  const handleSortChange = (sortOption: SortOption) => {
     if (sortOption === 'highToLow') {
-      setData(data.sort((a, b) => b.usd_24h_change - a.usd_24h_change));
+      setData(
+        data.sort((a: any, b: any) => b.usd_24h_change - a.usd_24h_change)
+      );
       setLastSortOption('highToLow');
     } else if (sortOption === 'lowToHigh') {
-      setData(data.sort((a, b) => a.usd_24h_change - b.usd_24h_change));
+      setData(
+        data.sort((a: any, b: any) => a.usd_24h_change - b.usd_24h_change)
+      );
       setLastSortOption('lowToHigh');
     } else if (sortOption === 'default') {
-      setData(data.sort((a, b) => b.usd_market_cap - a.usd_market_cap));
+      setData(
+        data.sort((a: any, b: any) => b.usd_market_cap - a.usd_market_cap)
+      );
       setLastSortOption('default');
-    };
+    }
   };
 
   const handleSortClick = () => {
@@ -113,45 +53,75 @@ const Table = ({ data, setData, isLoading, rowLength, activeDataSource }) => {
   }, [activeDataSource]);
 
   return (
-    <StyledTable>
+    <table
+      className={clsx(
+        'w-[80%] max-w-[720px] rounded-[10px] box-border bg-[var(--bg-table)] mt-0 mx-auto mb-10',
+        'shadow-[0_2px_27px_7px_rgba(3,169,245,0.13)] border-collapse',
+        'max-[700px]:w-[90%] max-[700px]:text-[14px] text-left',
+        '[&_th]:pl-[30px] [&_th]:border-[var(--color-table-border)] [&_th]:border [&_th]:leading-[16.1px]',
+        '[&_td]:pl-[30px] [&_td]:border-[var(--color-table-border)] [&_td]:border [&_td]:leading-[16.1px]',
+        '[&_th:last-child]:border-r-0 [&_td:last-child]:border-r-0',
+        '[&_th:first-child]:border-l-0 [&_td:first-child]:border-l-0',
+        '[&_th:last-child]:w-[25%] [&_td:last-child]:w-[25%]',
+        'max-[700px]:[&_th]:px-[12px] max-[700px]:[&_td]:px-[12px]'
+      )}
+    >
       <thead>
-        <tr>
-          <HeaderCell>Name</HeaderCell>
-          <HeaderCell>Price</HeaderCell>
-          <HeaderCell 
-            onClick={handleSortClick} 
+        <tr className="h-[65px] max-[700px]:h-[60px]">
+          <th
+            className={clsx(
+              'font-extrabold text-[var(--text-header-cell-main)] text-[24px]',
+              'max-[800px]:text-[20px] max-[700px]:text-[18px] max-[550px]:text-[16px]',
+              '!border-t-0'
+            )}
+          >
+            Name
+          </th>
+          <th
+            className={clsx(
+              'font-extrabold text-[var(--text-header-cell)] text-[24px]',
+              'max-[800px]:text-[20px] max-[700px]:text-[18px] max-[550px]:text-[16px]',
+              '!border-t-0'
+            )}
+          >
+            Price
+          </th>
+          <th
+            className={clsx(
+              'font-extrabold text-[var(--text-header-cell)] text-[24px] relative',
+              'max-[800px]:text-[20px] max-[700px]:text-[18px] max-[550px]:text-[16px]',
+              '!border-t-0'
+            )}
+            onClick={handleSortClick}
             style={{
-              userSelect:'none',
-              cursor: 'pointer'
-            }}>
-            Change<Sorter lastSortOption={lastSortOption} />
-          </HeaderCell>
+              userSelect: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Change
+            <Sorter lastSortOption={lastSortOption} />
+          </th>
         </tr>
       </thead>
-      <PriceTable_Tbody>
-        {
-          !isLoading 
-          ? data.map(coin => (
-            <Row 
-              key={`CoinRow-${coin.id}`}
-              isLoading={isLoading}
-              name={coin.name}
-              symbol={coin.symbol.toUpperCase()}
-              priceUsd={coin.usd}
-              priceBtc={coin.btc}
-              priceChange={coin.usd_24h_change}
-            />
-          ))
+      <tbody className="text-[var(--text-tbody)] [&>*:nth-child(odd)]:bg-[var(--bg-table-row-odd)] [&>*:last-child>td]:border-b-0">
+        {!isLoading
+          ? data.map((coin: any) => (
+              <Row
+                key={`CoinRow-${coin.id}`}
+                isLoading={isLoading}
+                name={coin.name}
+                symbol={coin.symbol.toUpperCase()}
+                priceUsd={coin.usd}
+                priceBtc={coin.btc}
+                priceChange={coin.usd_24h_change}
+              />
+            ))
           : [...Array(rowLength)].map((e, i) => (
-            <Row 
-              key={`CoinRow-${i}`}
-              isLoading={isLoading}
-            />
-          ))
-        }
-      </PriceTable_Tbody>
-    </StyledTable>
+              <Row key={`CoinRow-${i}`} isLoading={isLoading} />
+            ))}
+      </tbody>
+    </table>
   );
-}
+};
 
 export default Table;

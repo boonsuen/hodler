@@ -1,12 +1,16 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import Head from 'next/head';
 import Table from '../components/Table';
-
-import { CoinsDataContext, mainCoinsInfo } from './_app';
+import {
+  CoinsDataContext,
+  CoinsDataContextType,
+} from '@/context/CoinsDataContext';
+import { mainCoinsInfo } from '@/configs';
 
 const Index = () => {
-  const { data, isLoading, isLoadingSec, activeDataSource } =
-    useContext(CoinsDataContext);
+  const { data, isLoading, activeDataSource } = useContext(
+    CoinsDataContext
+  ) as CoinsDataContextType;
   const isInitialMount = useRef(true);
 
   const cmcCoinIds = [1, 1839, 1765, 2010, 52, 1376, 1697, 2092];
@@ -35,32 +39,22 @@ const Index = () => {
           })
           .sort((a, b) => b.usd_market_cap - a.usd_market_cap)
       : Object.values(data)
-          .filter((coin: { id: number }) => {
+          .filter((coin: any) => {
             return cmcCoinIds.some((id) => id === coin.id);
           })
-          .map(
-            (coin: {
-              quote: {
-                USD: {
-                  price: number;
-                  market_cap: number;
-                  percent_change_24h: number;
-                };
-              };
-            }) => {
-              return {
-                ...coin,
-                usd: Number(
-                  Math.round(Number(coin.quote.USD.price + 'e2')) + 'e-2'
-                ),
-                usd_24h_change: Number(
-                  Math.round(Number(coin.quote.USD.percent_change_24h + 'e2')) +
-                    'e-2'
-                ),
-                usd_market_cap: coin.quote.USD.market_cap,
-              };
-            }
-          )
+          .map((coin: any) => {
+            return {
+              ...coin,
+              usd: Number(
+                Math.round(Number(coin.quote.USD.price + 'e2')) + 'e-2'
+              ),
+              usd_24h_change: Number(
+                Math.round(Number(coin.quote.USD.percent_change_24h + 'e2')) +
+                  'e-2'
+              ),
+              usd_market_cap: coin.quote.USD.market_cap,
+            };
+          })
           .sort((a, b) => b.usd_market_cap - a.usd_market_cap);
 
   const [coinsData, setCoinsData] = useState(coinsDataForState);
@@ -69,7 +63,7 @@ const Index = () => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      if (activeDataSource === 'CoinGecko' && !isLoading && isLoadingSec) {
+      if (activeDataSource === 'CoinGecko' && !isLoading) {
         setCoinsData(
           mainCoinsInfo
             .map((coin) => {
@@ -91,38 +85,27 @@ const Index = () => {
       } else if (activeDataSource === 'CoinMarketCap' && !isLoading) {
         setCoinsData(
           Object.values(data)
-            .filter((coin: { id: number }) => {
+            .filter((coin: any) => {
               return cmcCoinIds.some((id) => id === coin.id);
             })
-            .map(
-              (coin: {
-                quote: {
-                  USD: {
-                    price: number;
-                    market_cap: number;
-                    percent_change_24h: number;
-                  };
-                };
-              }) => {
-                return {
-                  ...coin,
-                  usd: Number(
-                    Math.round(Number(coin.quote.USD.price + 'e2')) + 'e-2'
-                  ),
-                  usd_24h_change: Number(
-                    Math.round(
-                      Number(coin.quote.USD.percent_change_24h + 'e2')
-                    ) + 'e-2'
-                  ),
-                  usd_market_cap: coin.quote.USD.market_cap,
-                };
-              }
-            )
+            .map((coin: any) => {
+              return {
+                ...coin,
+                usd: Number(
+                  Math.round(Number(coin.quote.USD.price + 'e2')) + 'e-2'
+                ),
+                usd_24h_change: Number(
+                  Math.round(Number(coin.quote.USD.percent_change_24h + 'e2')) +
+                    'e-2'
+                ),
+                usd_market_cap: coin.quote.USD.market_cap,
+              };
+            })
             .sort((a, b) => b.usd_market_cap - a.usd_market_cap)
         );
       }
     }
-  }, [isLoading, isLoadingSec, activeDataSource, data]);
+  }, [isLoading, activeDataSource, data]);
 
   return (
     <>
