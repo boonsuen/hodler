@@ -112,7 +112,7 @@ function App({ Component, pageProps }: AppProps) {
 
 const queryClient = new QueryClient();
 
-export default function ({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <App Component={Component} {...pageProps} />
